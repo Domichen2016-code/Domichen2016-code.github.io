@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ghost catcher</title>
+    <style>
+        img{
+            position: absolute;
+            left: 200px;
+            top: 100px;
+        }
+
+    </style>
+</head>
+<body>
+  <img src="./ghost.png" alt="" style="width:175px;height:200px;" id="ghost" onclick="addScore()">  
+  <h2 id="score">score:0</h2>
+  <h2 id="timer">Time left:</h2>
+  <script>
+    var gameIsDone = false
+
+    var remainingTime = 15 // todo change to 0:xx
+    var userInput = prompt("type 1 for easy 2 for medium 3 for hard and 4 for impossible for dificulty")
+    var levelsec
+    console.log(userInput);
+    var finalScore = 0
+    if (userInput == "1") {
+        // easy level
+        levelsec = 800
+    } else if (userInput == "2") {
+       // medium level 
+       levelsec = 500
+    } else if  (userInput == "3"){
+       // hard level
+       levelsec =  300     
+      }  else if  (userInput == "4"){
+      // imposible level
+      levelsec = 100
+      } else {
+       levelsec = 950
+      }
+    
+      function moveGhost(l, t) {
+        document.getElementById("ghost").style.left = l + "px"
+        document.getElementById("ghost").style.top = t + "px"
+      }
+
+      function addScore() {
+        if (!gameIsDone) {
+          finalScore++
+          document.getElementById("score").innerHTML = finalScore
+
+        }
+      }
+
+      function randomLT(params) {
+        
+        
+        if (gameIsDone == false) {
+          // game is still going
+          var left = Math.floor(Math. random() * (1000 - 1) + 1)
+          var top = Math.floor(Math. random() * (661 - 1) + 1)
+          moveGhost(left, top)  
+        } else {
+          // game is done, we block user input
+        }
+        
+      }
+      setTimeout(() => {
+        console.log("setting gameIsDone to true");
+        
+        gameIsDone = true
+        alert("you scored " + finalScore + ". Click ok to play again")
+        location.reload()
+      }, 17000);
+        
+    let timerText = document.getElementById("timer") 
+    let timerId = setInterval(() => {
+      timerText.innerHTML = remainingTime
+
+      remainingTime--
+      if (remainingTime == -1) {
+        clearInterval(timerId)
+      }
+    }, 1000);
+
+    let moveTimer = setInterval(() => {
+      randomLT()
+      if (gameIsDone == true) {
+        console.log("game is done now, should stop moving");
+        
+        clearInterval(moveTimer)
+      } else {
+        console.log("game is not done");
+        
+      }
+    }, levelsec);
+      
+    
+  </script>
+</body>
+</html>   

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>guess the number</title>
+    <style>
+        div{
+            font-size: 70px;
+            text-align: center;
+        }
+        input{
+            width: 150px;
+            height: 35px;
+            position: absolute;
+            left: 800px;
+            font-size: 25px;
+        }
+        
+    </style>
+</head>
+<body bgcolor="Aqua">
+    <div>I am thinking of a number 1-1000</div>
+   <input type="number" id="number">
+    <script>
+        var result;
+        var tries = 0
+        function checknumber() {
+            // getUserInput vs result
+           
+            if (document.getElementById("number").value > result ) {
+             alert("go lower")    
+            } else if((document.getElementById("number").value < result )) {
+             alert ("go higher")   
+            } else{
+              alert ("you got it right in " + tries + " steps!")  
+              location.reload()
+            }
+        }
+
+        function generatenumber() {            
+            result = Math.floor(Math. random() * (1000 - 1) + 1)
+        }
+        generatenumber()
+        document.addEventListener('keyup', function(event){     
+            console.log(event.key);
+            if (event.key == "Enter") {
+                tries++
+                checknumber()
+            } 
+
+            
+        }); 
+
+    </script>
+</body>
+</html>
