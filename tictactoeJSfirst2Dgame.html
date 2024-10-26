@@ -27,6 +27,18 @@
             font-size: 100px;
             font-family: Impact;
             color:blue;
+            display: none;
+        }
+        #play_again{
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            margin-right: -50%;
+            transform: translate(-50%, -50%);
+            font-size: 100px;
+            font-family: Impact;
+            color:blue;
+            display: none ;
         }
         .row{clear: both;}
         .board{
@@ -72,8 +84,8 @@
         var whoseTurn = "X";
         var isgamedone = false;
         function showrestart(params) {
-            var x = document.getElementById("btrestart");
-            x.style.display = "block";
+            // var x = document.getElementById("btrestart");
+            // x.style.display = "block";
         }
 
         function checkWinner() {
@@ -148,14 +160,18 @@
         }
         function alertwinne() {
             isgamedone = true;
+            console.log("this is alertwinne function");
+            document.getElementById("play_again").style.display = "block"
+            document.getElementById("final_message").style.display = "block"
             document.getElementById("final_message").innerHTML = "The winner is " + whoseTurn + "!!!"
             document.getElementById("board").style.display= "none";
-            document.getElementById("feedback").style.display = "block";
+            // document.getElementById("feedback").style.display = "block";
             showrestart()
         }
 
         function alerttttdraw(params) {
             isgamedone = true;
+            document.getElementById("final_message").style.display = "block"
             document.getElementById("final_message").innerHTML = "alertttt youre game is drawed";
             document.getElementById("board").style.display= "none";
             document.getElementById("feedback").style.display = "block";
@@ -192,13 +208,13 @@
         }
         function restart() {
             //step 1, hide restart div
-            document.getElementById("btrestart").style.display = "none";
+            // document.getElementById("btrestart").style.display = "none";
             //step 2, hide final_message div
-            document.getElementById("final_message").style.display = " none"
+            // document.getElementById("final_message").style.display = " none"
             //step 3, hide feedback form
-            document.getElementById("feedback").style.display = "none";
+            //document.getElementById("feedback").style.display = "none";
             //step 4, show board
-           document.getElementById("board").style.display = "block";
+           //document.getElementById("board").style.display = "block";
 
            location.reload();
         }
@@ -237,9 +253,7 @@
     </div>
 
     <div id="final_message"></div>
-    
-    <div id="btrestart"  onclick="restart()">restart</div>
-    
+    <div id="play_again" onclick="restart()">Click here to play again</div>
     <div id="gamey" onclick="clicking()">start your Game</div>
 
 </body>
