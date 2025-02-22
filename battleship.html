@@ -11,8 +11,7 @@
             height: 60px;
             border: 2px dodgerblue solid;
             float:left;
-            color: transparent
-            ;
+            color: red;
         }
         .row{
             clear: both;
@@ -230,9 +229,11 @@
             } else if (direction == 1) {
                 if (document.getElementById("b"+(shipHeadRow+1)+shipHeadCol).innerHTML != "x") {
                   document.getElementById("b"+(shipHeadRow+1)+shipHeadCol).innerHTML = "x"
+                }
             } else if (direction == 2) {
                 if (document.getElementById("b"+shipHeadRow+(shipHeadCol-1)).innerHTML != "x") {
                   document.getElementById("b"+shipHeadRow+(shipHeadCol-1)).innerHTML = "x"
+                }
             } else if (direction == 3) {
                 if (document.getElementById("b"+shipHeadRow+(shipHeadCol+1)).innerHTML != "x") {
                   document.getElementById("b"+shipHeadRow+(shipHeadCol+1)).innerHTML = "x"
@@ -265,27 +266,28 @@
                 }
                 if (document.getElementById("b"+(shipHeadRow-2)+shipHeadCol).innerHTML != "x") {
                     document.getElementById("b"+(shipHeadRow-2)+shipHeadCol).innerHTML = "x"
- 
-                
-
+                }
             } else if (direction == 1) {
                 if (document.getElementById("b"+(shipHeadRow+1)+shipHeadCol).innerHTML != "x") {
                   document.getElementById("b"+(shipHeadRow+1)+shipHeadCol).innerHTML = "x"
                 }
                 if (document.getElementById("b"+(shipHeadRow+2)+shipHeadCol).innerHTML != "x") {
                  document.getElementById("b"+(shipHeadRow+2)+shipHeadCol).innerHTML = "x"
+                }
             } else if (direction == 2) {
                 if (document.getElementById("b"+shipHeadRow+(shipHeadCol-1)).innerHTML != "x") {
                   document.getElementById("b"+shipHeadRow+(shipHeadCol-1)).innerHTML = "x"
                 }
                 if (document.getElementById("b"+shipHeadRow+(shipHeadCol-2)).innerHTML != "x") {
                 document.getElementById("b"+shipHeadRow+(shipHeadCol-2)).innerHTML = "x"
+                }
             } else if (direction == 3) {
                 if (document.getElementById("b"+shipHeadRow+(shipHeadCol+1)).innerHTML != "x") {
                   document.getElementById("b"+shipHeadRow+(shipHeadCol+1)).innerHTML = "x"
                 }
                 if (document.getElementById("b"+shipHeadRow+(shipHeadCol+2)).innerHTML != "x") {
                 document.getElementById("b"+shipHeadRow+(shipHeadCol+2)).innerHTML = "x"
+                }
             }
         }
         function placeShipLength4(){
@@ -316,33 +318,42 @@
                 }
                 if (document.getElementById("b"+(shipHeadRow-3)+shipHeadCol).innerHTML != "x") {
                 document.getElementById("b"+(shipHeadRow-3)+shipHeadCol).innerHTML = "x"
+                }
             } else if (direction == 1) {
                 if (document.getElementById("b"+(shipHeadRow+1)+shipHeadCol).innerHTML != "x") {
                   document.getElementById("b"+(shipHeadRow+1)+shipHeadCol).innerHTML = "x"
+                }
                   if (document.getElementById("b"+(shipHeadRow+2)+shipHeadCol).innerHTML != "x") {
                     document.getElementById("b"+(shipHeadRow+2)+shipHeadCol).innerHTML = "x"
+                  }
                     if (document.getElementById("b"+(shipHeadRow+3)+shipHeadCol).innerHTML != "x") {
-                 document.getElementById("b"+(shipHeadRow+3)+shipHeadCol).innerHTML = "x"
+                        document.getElementById("b"+(shipHeadRow+3)+shipHeadCol).innerHTML = "x"
+                    }
+                
             } else if (direction == 2) {
                 if (document.getElementById("b"+shipHeadRow+(shipHeadCol-1)).innerHTML != "x") {
                   document.getElementById("b"+shipHeadRow+(shipHeadCol-1)).innerHTML = "x"
                 }
                 if (document.getElementById("b"+shipHeadRow+(shipHeadCol-2)).innerHTML != "x") {
                     document.getElementById("b"+shipHeadRow+(shipHeadCol-2)).innerHTML = "x"
+                }
                     if (document.getElementById("b"+shipHeadRow+(shipHeadCol-3)).innerHTML != "x") {
                         document.getElementById("b"+shipHeadRow+(shipHeadCol-3)).innerHTML = "x"
-                }
+                    }
+                
             } else if (direction == 3) {
                 if (document.getElementById("b"+shipHeadRow+(shipHeadCol+1)).innerHTML != "x") {
                   document.getElementById("b"+shipHeadRow+(shipHeadCol+1)).innerHTML = "x"
                 }
                 if (document.getElementById("b"+shipHeadRow+(shipHeadCol+2)).innerHTML != "x") {
                     document.getElementById("b"+shipHeadRow+(shipHeadCol+2)).innerHTML = "x"
+                }
                     if (document.getElementById("b"+shipHeadRow+(shipHeadCol+3)).innerHTML != "x") {
                         document.getElementById("b"+shipHeadRow+(shipHeadCol+3)).innerHTML = "x"
+                    }
                 }
             }  
-        }
+        
         function placeShipLength5(){
             var shipHeadRow = 0
             var shipHeadCol = 0
@@ -371,44 +382,52 @@
                 }
                 if (document.getElementById("b"+(shipHeadRow-3)+shipHeadCol).innerHTML != "x") {
                 document.getElementById("b"+(shipHeadRow-3)+shipHeadCol).innerHTML = "x"
+                }
                 if (document.getElementById("b"+(shipHeadRow-4)+shipHeadCol).innerHTML != "x") {
                 document.getElementById("b"+(shipHeadRow-4)+shipHeadCol).innerHTML = "x"
+                }
             } else if (direction == 1) {
                 if (document.getElementById("b"+(shipHeadRow+1)+shipHeadCol).innerHTML != "x") {
                   document.getElementById("b"+(shipHeadRow+1)+shipHeadCol).innerHTML = "x"
                 }
                 if (document.getElementById("b"+(shipHeadRow+2)+shipHeadCol).innerHTML != "x") {
                     document.getElementById("b"+(shipHeadRow+2)+shipHeadCol).innerHTML = "x"
-                    if (document.getElementById("b"+(shipHeadRow+3)+shipHeadCol).innerHTML != "x") {
-                        document.getElementById("b"+(shipHeadRow+3)+shipHeadCol).innerHTML = "x"
-                        if (document.getElementById("b"+(shipHeadRow+4)+shipHeadCol).innerHTML != "x") {
-                            document.getElementById("b"+(shipHeadRow+4)+shipHeadCol).innerHTML = "x"
-                    }
+                }
+               if (document.getElementById("b"+(shipHeadRow+3)+shipHeadCol).innerHTML != "x") {
+                    document.getElementById("b"+(shipHeadRow+3)+shipHeadCol).innerHTML = "x"
+               }
+                if (document.getElementById("b"+(shipHeadRow+4)+shipHeadCol).innerHTML != "x") {
+                    document.getElementById("b"+(shipHeadRow+4)+shipHeadCol).innerHTML = "x"
+                }
             } else if (direction == 2) {
                 if (document.getElementById("b"+shipHeadRow+(shipHeadCol-1)).innerHTML != "x") {
                   document.getElementById("b"+shipHeadRow+(shipHeadCol-1)).innerHTML = "x"
                 }
                 if (document.getElementById("b"+shipHeadRow+(shipHeadCol-2)).innerHTML != "x") {
                     document.getElementById("b"+shipHeadRow+(shipHeadCol-2)).innerHTML = "x"
-                    if (document.getElementById("b"+shipHeadRow+(shipHeadCol-3)).innerHTML != "x") {
-                        document.getElementById("b"+shipHeadRow+(shipHeadCol-3)).innerHTML = "x"
-                        if (document.getElementById("b"+shipHeadRow+(shipHeadCol-4)).innerHTML != "x") {
-                            document.getElementById("b"+shipHeadRow+(shipHeadCol-4)).innerHTML = "x"
-                    }
+                }
+                if (document.getElementById("b"+shipHeadRow+(shipHeadCol-3)).innerHTML != "x") {
+                    document.getElementById("b"+shipHeadRow+(shipHeadCol-3)).innerHTML = "x"
+                }
+                if (document.getElementById("b"+shipHeadRow+(shipHeadCol-4)).innerHTML != "x") {
+                    document.getElementById("b"+shipHeadRow+(shipHeadCol-4)).innerHTML = "x"
+                }
             } else if (direction == 3) {
                 if (document.getElementById("b"+shipHeadRow+(shipHeadCol+1)).innerHTML != "x") {
-                  document.getElementById("b"+shipHeadRow+(shipHeadCol+1)).innerHTML = "x"
+                    document.getElementById("b"+shipHeadRow+(shipHeadCol+1)).innerHTML = "x"
                 }
                 if (document.getElementById("b"+shipHeadRow+(shipHeadCol+2)).innerHTML != "x") {
                     document.getElementById("b"+shipHeadRow+(shipHeadCol+2)).innerHTML = "x"
-                    if (document.getElementById("b"+shipHeadRow+(shipHeadCol+3)).innerHTML != "x") {
-                        document.getElementById("b"+shipHeadRow+(shipHeadCol+3)).innerHTML = "x"
-                        if (document.getElementById("b"+shipHeadRow+(shipHeadCol+4)).innerHTML != "x") {
-                            document.getElementById("b"+shipHeadRow+(shipHeadCol+4)).innerHTML = "x"
-                    }
+                }
+                if (document.getElementById("b"+shipHeadRow+(shipHeadCol+3)).innerHTML != "x") {
+                    document.getElementById("b"+shipHeadRow+(shipHeadCol+3)).innerHTML = "x"
+                }
+                if (document.getElementById("b"+shipHeadRow+(shipHeadCol+4)).innerHTML != "x") {
+                    document.getElementById("b"+shipHeadRow+(shipHeadCol+4)).innerHTML = "x"                        }
+                }
                 
             }
-        }
+        
 
     </script>
 </head>
