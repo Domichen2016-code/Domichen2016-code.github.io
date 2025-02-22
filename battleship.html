@@ -11,7 +11,7 @@
             height: 60px;
             border: 2px dodgerblue solid;
             float:left;
-            color: red;
+            color: transparent;
         }
         .row{
             clear: both;
@@ -151,11 +151,27 @@
             document.getElementById("som").style.display = "none"
             document.getElementById("soh").style.display = "none"   
             ils = true
-            placeShipLength5()
-            placeShipLength4()
-            placeShipLength3()
-            placeShipLength3()
-            placeShipLength2()
+            while (placeShipLength5() == false) {
+                console.log("retrying p5")
+                
+            }
+            while (placeShipLength4() == false) {
+                console.log("retrying p4")
+                
+            }
+            while (placeShipLength3() == false) {
+                console.log("retrying p3")
+                
+            }
+            while (placeShipLength3() == false) {
+                console.log("retrying p3")
+                
+            }
+            while (placeShipLength2() == false) {
+                console.log("retrying p2")
+                
+            }
+            
             
         }
         function g7() {
@@ -166,13 +182,34 @@
             document.getElementById("som").style.display = "none"
             document.getElementById("soh").style.display = "none"   
             ils = true
-            placeShipLength5()
-            placeShipLength4()
-            placeShipLength4()
-            placeShipLength3()
-            placeShipLength3()
-            placeShipLength2()
-            placeShipLength2()
+            while (placeShipLength5() == false) {
+                console.log("retrying p5")
+                
+            }
+            while (placeShipLength4() == false) {
+                console.log("retrying p4")
+                
+            }
+            while (placeShipLength4() == false) {
+                console.log("retrying p4")
+                
+            }
+            while (placeShipLength3() == false) {
+                console.log("retrying p3")
+                
+            }
+            while (placeShipLength3() == false) {
+                console.log("retrying p3")
+                
+            }
+            while (placeShipLength2() == false) {
+                console.log("retrying p2")
+                
+            }
+            while (placeShipLength2() == false) {
+                console.log("retrying p2")
+                
+            }
            
           
             
@@ -187,17 +224,46 @@
             document.getElementById("som").style.display = "none"
             document.getElementById("soh").style.display = "none"   
             ils = true   
-
-            placeShipLength5()
-            placeShipLength5()    
-            placeShipLength4()
-            placeShipLength4() 
-            placeShipLength3()
-            placeShipLength3()
-            placeShipLength3()
-            placeShipLength3()
-            placeShipLength2()
-            placeShipLength2()
+            while (placeShipLength5() == false) {
+                console.log("retrying p5")
+                
+            }
+            while (placeShipLength5() == false) {
+                console.log("retrying p5")
+                
+            }
+            while (placeShipLength4() == false) {
+                console.log("retrying p4")
+                
+            }
+            while (placeShipLength4() == false) {
+                console.log("retrying p4")
+                
+            }
+            while (placeShipLength3() == false) {
+                console.log("retrying p3")
+                
+            }
+            while (placeShipLength3() == false) {
+                console.log("retrying p3")
+                
+            }
+            while (placeShipLength3() == false) {
+                console.log("retrying p3")
+                
+            }
+            while (placeShipLength3() == false) {
+                console.log("retrying p3")
+                
+            }
+            while (placeShipLength2() == false) {
+                console.log("retrying p2")
+                
+            }
+            while (placeShipLength2() == false) {
+                console.log("retrying p2")
+                
+            }
            
         }
 
@@ -219,28 +285,45 @@
                 shipHeadCol = getRndInteger(0,8)
                 
             }
-            if (document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML != "x") {
-                document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML = "x"
-            }
+
+            console.log("shipHeadRow: " + shipHeadRow, "shipHeadCol: " + shipHeadCol, "direction: " + direction);
+            
+
+            // check 2 boxes
             if (direction == 0) {
-                if (document.getElementById("b"+(shipHeadRow-1)+shipHeadCol).innerHTML != "x") {
-                  document.getElementById("b"+(shipHeadRow-1)+shipHeadCol).innerHTML = "x"
+                if (document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML == "x"
+                    || document.getElementById("b"+(shipHeadRow-1)+shipHeadCol).innerHTML == "x") {
+                    return false;
                 }
             } else if (direction == 1) {
-                if (document.getElementById("b"+(shipHeadRow+1)+shipHeadCol).innerHTML != "x") {
-                  document.getElementById("b"+(shipHeadRow+1)+shipHeadCol).innerHTML = "x"
+                if (document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML == "x"
+                    || document.getElementById("b"+(shipHeadRow+1)+shipHeadCol).innerHTML == "x") {
+                    return false;
+                    
                 }
-            } else if (direction == 2) {
-                if (document.getElementById("b"+shipHeadRow+(shipHeadCol-1)).innerHTML != "x") {
-                  document.getElementById("b"+shipHeadRow+(shipHeadCol-1)).innerHTML = "x"
+            } else if(direction == 2) {
+                if (document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML == "x"
+                    || document.getElementById("b"+shipHeadRow+(shipHeadCol-1)).innerHTML == "x") {
+                    return false;
                 }
-            } else if (direction == 3) {
-                if (document.getElementById("b"+shipHeadRow+(shipHeadCol+1)).innerHTML != "x") {
-                  document.getElementById("b"+shipHeadRow+(shipHeadCol+1)).innerHTML = "x"
+            } else if(direction == 3) {
+                if (document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML == "x"
+                    || document.getElementById("b"+shipHeadRow+(shipHeadCol+1)).innerHTML == "x") {
+                    return false;
                 }
             }
-        }
 
+            document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML = "x"
+            if (direction == 0) {
+                document.getElementById("b"+(shipHeadRow-1)+shipHeadCol).innerHTML = "x"
+            } else if (direction == 1) {
+                document.getElementById("b"+(shipHeadRow+1)+shipHeadCol).innerHTML = "x"
+            } else if (direction == 2) {
+                document.getElementById("b"+shipHeadRow+(shipHeadCol-1)).innerHTML = "x"
+            } else if (direction == 3) {
+                document.getElementById("b"+shipHeadRow+(shipHeadCol+1)).innerHTML = "x"
+            }
+        }
         function placeShipLength3(){
             var shipHeadRow = 0
             var shipHeadCol = 0
@@ -259,6 +342,38 @@
                 shipHeadCol = getRndInteger(0,8)
                 
             }
+
+            console.log("shipHeadRow: " + shipHeadRow, "shipHeadCol: " + shipHeadCol, "direction: " + direction);
+
+
+                        // check 3 boxes
+            if (direction == 0) {
+                if (document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML == "x"
+                    || document.getElementById("b"+(shipHeadRow-1)+shipHeadCol).innerHTML == "x"
+                || document.getElementById("b"+(shipHeadRow-2)+shipHeadCol).innerHTML == "x") {
+                    return false;
+                }
+            } else if (direction == 1) {
+                if (document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML == "x"
+                    || document.getElementById("b"+(shipHeadRow+1)+shipHeadCol).innerHTML == "x"
+                || document.getElementById("b"+(shipHeadRow+2)+shipHeadCol).innerHTML == "x") {
+                    return false;
+                    
+                }
+            } else if(direction == 2) {
+                if (document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML == "x"
+                    || document.getElementById("b"+shipHeadRow+(shipHeadCol-1)).innerHTML == "x"
+                || document.getElementById("b"+shipHeadRow+(shipHeadCol-2)).innerHTML == "x") {
+                    return false;
+                }
+            } else if(direction == 3) {
+                if (document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML == "x"
+                    || document.getElementById("b"+shipHeadRow+(shipHeadCol+1)).innerHTML == "x"
+                || document.getElementById("b"+shipHeadRow+(shipHeadCol+2)).innerHTML == "x") {
+                    return false;
+                }
+            }
+
             document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML = "x"
             if (direction == 0) {
                 if (document.getElementById("b"+(shipHeadRow-1)+shipHeadCol).innerHTML != "x") {
@@ -308,6 +423,42 @@
                 shipHeadCol = getRndInteger(0,6)
                 
             }
+
+            console.log("shipHeadRow: " + shipHeadRow, "shipHeadCol: " + shipHeadCol, "direction: " + direction);
+
+
+                        // check 4 boxes
+            if (direction == 0) {
+                if (document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML == "x"
+                    || document.getElementById("b"+(shipHeadRow-1)+shipHeadCol).innerHTML == "x"
+                || document.getElementById("b"+(shipHeadRow-2)+shipHeadCol).innerHTML == "x"
+                || document.getElementById("b"+(shipHeadRow-3)+shipHeadCol).innerHTML == "x") {
+                    return false;
+                }
+            } else if (direction == 1) {
+                if (document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML == "x"
+                    || document.getElementById("b"+(shipHeadRow+1)+shipHeadCol).innerHTML == "x"
+                || document.getElementById("b"+(shipHeadRow+2)+shipHeadCol).innerHTML == "x"
+                || document.getElementById("b"+(shipHeadRow+3)+shipHeadCol).innerHTML == "x") {
+                    return false;
+                    
+                }
+            } else if(direction == 2) {
+                if (document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML == "x"
+                    || document.getElementById("b"+shipHeadRow+(shipHeadCol-1)).innerHTML == "x"
+                || document.getElementById("b"+shipHeadRow+(shipHeadCol-2)).innerHTML == "x"
+                || document.getElementById("b"+shipHeadRow+(shipHeadCol-3)).innerHTML == "x") {
+                    return false;
+                }
+            } else if(direction == 3) {
+                if (document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML == "x"
+                    || document.getElementById("b"+shipHeadRow+(shipHeadCol+1)).innerHTML == "x"
+                    || document.getElementById("b"+shipHeadRow+(shipHeadCol+2)).innerHTML == "x"
+                    || document.getElementById("b"+shipHeadRow+(shipHeadCol+3)).innerHTML == "x") {
+                    return false;
+                }
+            }
+
             document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML = "x"
             if (direction == 0) {
                 if (document.getElementById("b"+(shipHeadRow-1)+shipHeadCol).innerHTML != "x") {
@@ -372,6 +523,45 @@
                 shipHeadCol = getRndInteger(0,6)
                 
             }
+
+            console.log("shipHeadRow: " + shipHeadRow, "shipHeadCol: " + shipHeadCol, "direction: " + direction);
+
+            // check 5 boxes
+            if (direction == 0) {
+                if (document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML == "x"
+                    || document.getElementById("b"+(shipHeadRow-1)+shipHeadCol).innerHTML == "x"
+                || document.getElementById("b"+(shipHeadRow-2)+shipHeadCol).innerHTML == "x"
+                || document.getElementById("b"+(shipHeadRow-3)+shipHeadCol).innerHTML == "x"
+                || document.getElementById("b"+(shipHeadRow-4)+shipHeadCol).innerHTML == "x") {
+                    return false;
+                }
+            } else if (direction == 1) {
+                if (document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML == "x"
+                    || document.getElementById("b"+(shipHeadRow+1)+shipHeadCol).innerHTML == "x"
+                || document.getElementById("b"+(shipHeadRow+2)+shipHeadCol).innerHTML == "x"
+                || document.getElementById("b"+(shipHeadRow+3)+shipHeadCol).innerHTML == "x"
+                || document.getElementById("b"+(shipHeadRow+4)+shipHeadCol).innerHTML == "x") {
+                    return false;
+                    
+                }
+            } else if(direction == 2) {
+                if (document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML == "x"
+                    || document.getElementById("b"+shipHeadRow+(shipHeadCol-1)).innerHTML == "x"
+                || document.getElementById("b"+shipHeadRow+(shipHeadCol-2)).innerHTML == "x"
+                || document.getElementById("b"+shipHeadRow+(shipHeadCol-3)).innerHTML == "x"
+                || document.getElementById("b"+shipHeadRow+(shipHeadCol-4)).innerHTML == "x") {
+                    return false;
+                }
+            } else if(direction == 3) {
+                if (document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML == "x"
+                    || document.getElementById("b"+shipHeadRow+(shipHeadCol+1)).innerHTML == "x"
+                || document.getElementById("b"+shipHeadRow+(shipHeadCol+2)).innerHTML == "x"
+                || document.getElementById("b"+shipHeadRow+(shipHeadCol+3)).innerHTML == "x"
+                || document.getElementById("b"+shipHeadRow+(shipHeadCol+4)).innerHTML == "x") {
+                    return false;
+                }
+            }
+
             document.getElementById("b"+shipHeadRow+shipHeadCol).innerHTML = "x"
             if (direction == 0) {
                 if (document.getElementById("b"+(shipHeadRow-1)+shipHeadCol).innerHTML != "x") {
