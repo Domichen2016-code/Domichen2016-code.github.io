@@ -5,4 +5,4 @@
 📫 How to reach me domichen2016.github.io
 😄 Pronouns: i,you,
 ⚡ Fun fact: i love coding
-my email  : coder.dominic2016@gmail.com
+my email  : domichen2016@gmail.com
