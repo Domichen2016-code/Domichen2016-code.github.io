@@ -173,7 +173,9 @@
         function alerttttdraw(params) {
             isgamedone = true;
             document.getElementById("final_message").style.display = "block"
-            document.getElementById("final_message").innerHTML = "alertttt youre game is drawed";
+             //        
+
+            document.getElementById("final_message").innerHTML = 'alertttt youre game is drawed <div onclick="restart()">click here to play again </div> <button onclick="gohome()">Back to Main Page</button>';
             document.getElementById("board").style.display= "none";
             document.getElementById("feedback").style.display = "block";
             showrestart()
@@ -219,6 +221,10 @@
 
            location.reload();
         }
+
+        function gohome() {
+            window.location.href = "index.html";
+        }
     </script>
 </head>
 <body>
@@ -256,8 +262,13 @@
         </div>
     </div>
 
-    <div id="final_message"></div>
-    <div id="play_again" onclick="restart()">Click here to play again</div>
+    <div id="final_message">
+        <button onclick="gohome()">Back to Main Page</button>
+    </div>
+    <div id="play_again">
+        <div onclick="restart()">click here to play again </div>
+        <button onclick="gohome()">Back to Main Page</button>
+    </div>
     <div id="gamey" onclick="clicking()">start your Game</div>
 
 </body>

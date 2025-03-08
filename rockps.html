@@ -168,7 +168,9 @@
             window.location.reload();
         }
 
-
+        function gohome(){
+            window.location.href = "./index.html";
+        }
 
     </script>
 </head>
@@ -181,6 +183,10 @@
    <h1 id="p2">player2</h1>
    <img id="leftpic" src="./cloud.jpeg" alt="">
    <img id="rightpic" src="./cloud.jpeg" alt="">
-   <div id="btrestart" onclick="refreshTheGame()">click here to play again</div>
+   <div id="btrestart">
+    <div onclick="refreshTheGame()">click here to play again </div>
+    <button onclick="gohome()">Back to Main Page</button>
+
+</div>
 </body>
 </html>
