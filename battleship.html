@@ -618,12 +618,19 @@
                 
             }
         
+            function gohome() {
+                window.location.href = "index.html";
+                
+            }
 
     </script>
 </head>
 <body>
 <div id="sb" onclick="sg()">start</div>
-<div id="rg" onclick="location.reload()">Click here to play again</div>
+<div id="rg" >
+    <div onclick="location.reload()"> Click here to play again </div>
+    <button onclick="gohome()">Back to Main Page</button>
+</div>
  <h1><div id="hello">Hello welcome to my Battleship game</div></h1>
     <div id="bboard">   
     <div class="row">
