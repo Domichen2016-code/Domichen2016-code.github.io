@@ -43,6 +43,18 @@
             display: none;
             font-size: 45px;
         }
+        #rulebutton{
+            position: absolute;
+            left: 90%;
+            top: 10%;
+            font-size: 30px;
+        }
+        #rule{
+            position: absolute;
+            left: 90%;
+            top: 20%;
+            font-size: 30px;
+        }
     </style>
     <script>
         var msgix = 0
@@ -622,10 +634,25 @@
                 window.location.href = "index.html";
                 
             }
+            function ocrule() {
+                
+            }
 
     </script>
 </head>
 <body>
+    <button id="rulebutton" onclick="ocrule">Rule</button>
+    <div id="rule">
+        <h1>Rule</h1>
+        <p>1. You have to find the ships in the board</p>
+        <p>2. You have to click on the boxes to find the ships</p>
+        <p>3. If you find all the ships in the selected difficulty level you win</p>
+        <p>4. If you don't find all the ships in the selected difficulty level you lose</p>
+        <p>5. You can select the difficulty level by clicking the buttons below</p>
+        <p>6. You can click the start button to start the game</p>
+        <p>7. You can click the reload button to play again</p>
+        <p>8. You can click the back to main page button to go back to the main page</p>
+    </div>
 <div id="sb" onclick="sg()">start</div>
 <div id="rg" >
     <div onclick="location.reload()"> Click here to play again </div>
