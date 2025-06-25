@@ -339,6 +339,23 @@
         
        
     </style>
+    <script>
+        let userInput = "";
+        while(userInput != "2" && userInput != "3" && userInput != "4" && userInput != "5") {
+            userInput = prompt("Welcome to monopoly. How many players will play? (2-5)")
+        }
+        let no_of_players = parseInt(userInput);
+        let allPlayers = [];
+        for (let i = 0; i < no_of_players; i++) {
+            let playerName = prompt("Enter the name of player " + (i + 1) + ": ");
+            let newPlayer = {
+                name: `p${i+1} - ${playerName}`,
+            };
+            allPlayers.push(newPlayer);
+        }
+        console.log(allPlayers);
+        
+        </script>
 </head>
 <body>
     <div id="board">
