@@ -31,17 +31,15 @@
 </head>
 <body bgcolor="Aqua">
     <h1> Welcome to Guess the Number.</h1>
-    <h2> Please choose a selection on who to play with.</h2>
     <div>I am thinking of a number 1-1000</div>
    <input type="number" id="number" onclick="pressearly()">
-   <div id="overlay"></div>
    <audio controls>
     <source src="Relaxing_Music.mp3" type="audio/mpeg">
   </audio>
     <script>
         var result;
         var tries = 0
-        document.getElementById("number").disabled = true;
+        document.getElementById("number").disabled = false;
         function checknumber() {
             // getUserInput vs result
            
