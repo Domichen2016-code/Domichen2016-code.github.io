@@ -363,14 +363,23 @@
         let allPlayers = [];
         for (let i = 0; i < no_of_players; i++) {
             let playerName = prompt("Enter the name of player " + (i + 1) + ": ");
+            while (playerName === "" || nameExists(playerName)) {
+                if (playerName === "") {
+                   playerName = prompt("Empty Username Please type username for Monopoly " + (i + 1));
+                } else {
+                    playerName = prompt("Player " + (i + 1) + " Username already exists. Please choose a different username.");
+                }
+            }
+            console.log("user has typed " + playerName);
             let newPlayer = {
                 name: `${playerName}`,
             };
             allPlayers.push(newPlayer);
         }
         console.log(allPlayers);
-        
-
+        function nameExists(name) {
+            return allPlayers.some(player => player.name === name);
+        }
         </script>
 </head>
 <body>
