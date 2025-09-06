@@ -355,6 +355,7 @@
        
     </style>
     <script>
+        var whoIsChoosing = 1;
         let userInput = "";
         while(userInput != "2" && userInput != "3" && userInput != "4" && userInput != "5") {
             userInput = prompt("Welcome to monopoly. How many players will play? (2-5)")
@@ -379,6 +380,32 @@
         console.log(allPlayers);
         function nameExists(name) {
             return allPlayers.some(player => player.name === name);
+        }
+        function selectToken(playerName, token) {
+            const player = allPlayers.find(p => p.name === playerName);
+            if (player) {
+                player.token = token;
+            }
+        }
+        function YesorNo(userChoice) {
+            if (userChoice === "yes") {
+                console.log("all players", allPlayers);
+                document.getElementById("confirmation").style.display = 'none';
+                whoIsChoosing++;
+                document.getElementById("activePlayer").innerHTML = allPlayers[whoIsChoosing - 1].name;
+
+                if (whoIsChoosing > no_of_players) {
+                    document.getElementById("CharacterSelection").style.display = 'none';
+                    document.getElementById("board").style.display = 'block';
+                    return;
+                }
+                return true;
+            } else if (userChoice === "no") {
+                console.log("no");
+                document.getElementById("confirmation").style.display = 'none';
+                return false;
+            }
+            
         }
         </script>
 </head>
@@ -429,11 +456,25 @@
         <div id="box39">Boardwalk</div>
     </div>
     <div id="CharacterSelection">
-        <h2><span id="P1"></span> : Choose Your Character</h2>
+        <h2><span id="activePlayer"></span> : Choose Your Character</h2>
+        <img src="monopoly_car_t.png" onclick="selectToken(allPlayers[whoIsChoosing - 1].name, 'car'); document.getElementById('confirmation').style.display='block';">
+        <img src="monopoly_cat_t.png" onclick="selectToken(allPlayers[whoIsChoosing - 1].name, 'cat'); document.getElementById('confirmation').style.display='block';">
+        <img src="monopoly_hat_t.png" onclick="selectToken(allPlayers[whoIsChoosing - 1].name, 'hat'); document.getElementById('confirmation').style.display='block';">
+        <img src="monopoly_horse_t.png" onclick="selectToken(allPlayers[whoIsChoosing - 1].name, 'horse'); document.getElementById('confirmation').style.display='block';">
+        <img src="monopoly_siren_t.png" onclick="selectToken(allPlayers[whoIsChoosing - 1].name, 'siren'); document.getElementById('confirmation').style.display='block';">
+        <br>
+        <div id="confirmation" style="display:none;">
+        <span>Are you sure?</span>
+        <br>
+        <button onclick="YesorNo('yes')">Yes</button>
+        <button onclick="YesorNo('no')">No</button>
+        </div>
+        
+
     </div>
 
     <script>
-        document.getElementById("P1").innerHTML = allPlayers[0].name;
+        document.getElementById("activePlayer").innerHTML = allPlayers[whoIsChoosing - 1].name;
 
     </script>
 
