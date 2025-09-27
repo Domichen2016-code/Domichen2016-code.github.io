@@ -22,7 +22,7 @@
             top: 294px;
             left: 681px;
             width: 350px;
-            height: 140px;
+            height: 280px;
             text-align: center;
             background-color: rgba(255, 255, 255, 0.8);
             border-radius: 10px;
@@ -406,12 +406,16 @@
                 console.log("all players", allPlayers);
                 document.getElementById("confirmation").style.display = 'none';
                 whoIsChoosing++;
-                document.getElementById("activePlayer").innerHTML = allPlayers[whoIsChoosing - 1].name;
 
                 if (whoIsChoosing > no_of_players) {
+                    console.log("all players have chosen their tokens");
                     document.getElementById("CharacterSelection").style.display = 'none';
                     document.getElementById("board").style.display = 'block';
+                    document.body.style.backgroundImage = "url('Monopoly_Board.jpg')";
                     return;
+                } else {
+                    document.getElementById("activePlayer").innerHTML = allPlayers[whoIsChoosing - 1].name;
+
                 }
                 return true;
             } else if (userChoice === "no") {
