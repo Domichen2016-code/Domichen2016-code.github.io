@@ -392,8 +392,157 @@
         function selectToken(playerName, token) {
             console.log(playerName + " has selected " + token);
             const player = allPlayers.find(p => p.name === playerName);
+            player.token = token;
             document.getElementById('confirmation').style.display='block';
             curerentToken = token;
+        }
+        function putalltokens() {
+            for (let index = 0; index < allPlayers.length; index++) {
+                const player = allPlayers[index];
+                if (player.token == "car") {
+                    var img = document.createElement("img");
+                    img.src = "monopoly_car_t.png";
+                    img.style.width = "50px";
+                    img.style.height = "50px";
+                    img.style.position = "absolute";
+                    
+                    var btm = 0;
+                    if (index == 0 || index == 1) {
+                        btm = 50;
+                        
+                    } else if (index == 2 || index == 3) {
+                    }
+                    img.style.bottom = btm + "px";
+
+                    var right = 0;
+                    if (index==0 || index==2) {
+                        right = 498
+                    } else if (index==1 || index==3) {
+                        right = 448
+                    } else if (index==4) {
+                        right = 473
+                    }
+
+                    img.style.right = right + "px";
+                    document.body.appendChild(img);
+                    console.log("catttt");
+                    
+                } else if (player.token == "cat") {
+                    var img = document.createElement("img");
+                    img.src = "monopoly_cat_t.png";
+                    img.style.width = "50px";
+                    img.style.height = "50px";
+                    img.style.position = "absolute";
+                    var btm = 0;
+                    if (index == 0 || index == 1) {
+                        btm = 50;
+                        
+                    } else if (index == 2 || index == 3) {
+                        btm = 0;
+                    } else if (index == 4) {
+                        btm = 25;
+                    }
+                    img.style.bottom = btm + "px";
+
+                    var right = 0;
+                    if (index==0 || index==2) {
+                        right = 498
+                    } else if (index==1 || index==3) {
+                        right = 448
+                    } else if (index==4) {
+                        right = 473
+                    }
+
+                    img.style.right = right + "px";    
+                    document.body.appendChild(img);
+                } else if (player.token == "hat") {
+                    var img = document.createElement("img");
+                    img.src = "monopoly_hat_t.png";
+                    img.style.width = "50px";
+                    img.style.height = "50px";
+                    img.style.position = "absolute";
+                    var btm = 0;
+                    if (index == 0 || index == 1) {
+                        btm = 50;
+                        
+                    } else if (index == 2 || index == 3) {
+                        btm = 0;
+                    } else if (index == 4) {
+                        btm = 25;
+                    }
+                    img.style.bottom = btm + "px";
+
+                    var right = 0;
+                    if (index==0 || index==2) {
+                        right = 498
+                    } else if (index==1 || index==3) {
+                        right = 448
+                    } else if (index==4) {
+                        right = 473
+                    }
+
+                    img.style.right = right + "px";
+                    document.body.appendChild(img);
+                } else if (player.token == "horse") {
+                    var img = document.createElement("img");
+                    img.src = "monopoly_horse_t.png";
+                    img.style.width = "50px";
+                    img.style.height = "50px";
+                    img.style.position = "absolute";
+                    var btm = 0;
+                    if (index == 0 || index == 1) {
+                        btm = 50;
+                        
+                    } else if (index == 2 || index == 3) {
+                        btm = 0;
+                    } else if (index == 4) {
+                        btm = 25;
+                    }
+                    img.style.bottom = btm + "px";
+                    
+                    var right = 0;
+                    if (index==0 || index==2) {
+                        right = 498
+                    } else if (index==1 || index==3) {
+                        right = 448
+                    } else if (index==4) {
+                        right = 473
+                    }
+
+                    img.style.right = right + "px";
+                    document.body.appendChild(img);
+                } else if (player.token == "siren") {
+                    var img = document.createElement("img");
+                    img.src = "monopoly_siren_t.png";
+                    img.style.width = "50px";
+                    img.style.height = "50px";
+                    img.style.position = "absolute";
+                    var btm = 0;
+                    if (index == 0 || index == 1) {
+                        btm = 50;
+                        
+                    } else if (index == 2 || index == 3) {
+                        btm = 0;
+                    } else if (index == 4) {
+                        btm = 25;
+                    }
+                    img.style.bottom = btm + "px";
+                    
+                    var right = 0;
+                    if (index==0 || index==2) {
+                        right = 498
+                    } else if (index==1 || index==3) {
+                        right = 448
+                    } else if (index==4) {
+                        right = 473
+                    }
+
+                    img.style.right = right + "px";
+                    document.body.appendChild(img);
+                    
+                };
+                
+            }
         }
         function YesorNo(userChoice) {
             if (userChoice === "yes") {
@@ -412,6 +561,8 @@
                     document.getElementById("CharacterSelection").style.display = 'none';
                     document.getElementById("board").style.display = 'block';
                     document.body.style.backgroundImage = "url('Monopoly_Board.jpg')";
+                    console.log("game starts now", allPlayers);
+                    putalltokens();
                     return;
                 } else {
                     document.getElementById("activePlayer").innerHTML = allPlayers[whoIsChoosing - 1].name;
