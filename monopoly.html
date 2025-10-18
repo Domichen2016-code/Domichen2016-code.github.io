@@ -662,14 +662,29 @@
             }
             
         }
-        function RollDice(params) {
-            setInterval(function() {
+        var diceRolling;
+        function RollStopDice(params) {
+            if (document.getElementById("Roll").innerHTML == "Roll") {
+                diceRolling = setInterval(function() {
                 var die1 = Math.floor(Math.random() * 6) + 1;
                 var die2 = Math.floor(Math.random() * 6) + 1;
                 document.getElementById("Dice1").src = "Dice" + die1 + ".png";
                 document.getElementById("Dice2").src = "Dice" + die2 + ".png";
             }, 200);
             document.getElementById("Roll").innerHTML = "Stop";
+            }  else {
+                clearInterval(diceRolling);
+                var d1 = document.getElementById("Dice1").src.at(-5);
+                var d2 = document.getElementById("Dice2").src.at(-5);
+                var total = parseInt(d1) + parseInt(d2);
+                whoIsPlaying = (whoIsPlaying + 1) % no_of_players;
+                console.log("dice rolled are " + d1 + " and " + d2);
+                document.getElementById("Dice1").src = "DiceEmpty.png";
+                document.getElementById("Dice2").src = "DiceEmpty.png";
+                document.getElementById("Roll").innerHTML = "Roll";
+            }
+            
+            
         }
         </script>
 </head>
@@ -679,7 +694,7 @@
         <div id="AllUserInfo"></div>
         <img src="DiceEmpty.png" id="Dice1">
         <img src="DiceEmpty.png" id="Dice2">
-        <div id="Roll" onclick="RollDice()">Roll</div>
+        <div id="Roll" onclick="RollStopDice()">Roll</div>
         <div id="box0">Go</div>
         <div id="box1">Meditera
             nean Ave</div>
