@@ -22,7 +22,7 @@
             top: 10px;
             right: 10px;
             width: 300px;
-            height: 600px;
+            height: 400px;
             background-color: rgba(130, 27, 27, 0.3);
             border-radius: 10px;
             padding: 10px;
@@ -416,6 +416,49 @@
        
     </style>
     <script>
+        var boxesProperties = {
+            1: {name: "Mediterranean Ave", price: 60, rent: 2},
+            2: {name: "Community Chest 1"},
+            3: {name: "Baltic Ave", price: 60, rent: 4},
+            4: {name: "Income Tax", price: 200},
+            5: {name: "Reading Railroad", price: 200, rent: 25},
+            6: {name: "Oriental Ave", price: 100, rent: 6},
+            7: {name: "Chance 1"},
+            8: {name: "Vermont Ave", price: 100, rent: 6},
+            9: {name: "Connecticut Ave", price: 120, rent: 8},
+            10: {name: "Jail / Just Visiting"},
+            11: {name: "St. Charles Place", price: 140, rent: 10},
+            12: {name: "Electric Company", price: 150, rent: 4},
+            13: {name: "States Ave", price: 140, rent: 10},
+            14: {name: "Virginia Ave", price: 160, rent: 12},
+            15: {name: "Pennsylvania Railroad", price: 200, rent: 25},
+            16: {name: "St. James Place", price: 180, rent: 14},
+            17: {name: "Community Chest 2"},
+            18: {name: "Tennessee Ave", price: 180, rent: 14},
+            19: {name: "New York Ave", price: 200, rent: 16},
+            20: {name: "Free Parking"},
+            21: {name: "Kentucky Ave", price: 220, rent: 18},
+            22: {name: "Chance 2"},
+            23: {name: "Indiana Ave", price: 220, rent: 18},
+            24: {name: "Illinois Ave", price: 240, rent: 20},
+            25: {name: "B & O Railroad", price: 200, rent: 25},
+            26: {name: "Atlantic Ave", price: 260, rent: 22},
+            27: {name: "Ventnor Ave", price: 260, rent: 22},
+            28: {name: "Water Works", price: 150, rent: 4},
+            29: {name: "Marvin Gardens", price: 280, rent: 24},
+            30: {name: "Go To Jail"},
+            31: {name: "Pacific Ave", price: 300, rent: 26},
+            32: {name: "North Carolina Ave", price: 300, rent: 26},
+            33: {name: "Community Chest 3"},
+            34: {name: "Pennsylvania Ave", price: 320, rent: 28},
+            35: {name: "Short Line", price: 200, rent: 25},
+            36: {name: "Chance 3"},
+            37: {name: "Park Place", price: 350, rent: 35},
+            38: {name: "Luxury Tax", price: 100},
+            39: {name: "Boardwalk", price: 400, rent: 50},
+        
+        }
+
         var whoIsChoosing = 1;
         var availableTokens = ['car', 'cat', 'hat', 'horse', 'siren'];
         var actionMessages = [
@@ -456,6 +499,12 @@
             console.log("user has typed " + playerName);
             let newPlayer = {
                 name: `${playerName}`,
+                money: 1500,
+                position: 0,
+                properties: [],
+                inJail: false,
+                jailTurns: 0,
+                token: null
             };
             allPlayers.push(newPlayer);
         }
@@ -679,8 +728,10 @@
                 var total = parseInt(d1) + parseInt(d2);
                 whoIsPlaying = (whoIsPlaying + 1) % no_of_players;
                 console.log("dice rolled are " + d1 + " and " + d2);
-                document.getElementById("Dice1").src = "DiceEmpty.png";
-                document.getElementById("Dice2").src = "DiceEmpty.png";
+                var totalSteps = parseInt(d1) + parseInt(d2);
+                console.log(boxesProperties[totalSteps].name);
+                document.getElementById("Dice1").src = "Dice" + d1 + ".png";
+                document.getElementById("Dice2").src = "Dice" + d2 + ".png";
                 document.getElementById("Roll").innerHTML = "Roll";
             }
             
