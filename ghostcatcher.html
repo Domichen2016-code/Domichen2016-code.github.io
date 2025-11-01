@@ -10,38 +10,58 @@
             position: absolute;
             left: 200px;
             top: 100px;
+            display: none;
         }
 
+        #score, #timer {
+            position: absolute;
+            left: 10px;
+        }
+        #score {
+            top: 50px;
+        }
+        #timer {
+            top: 100px;
+        }
+        #diff_sel {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: lightgrey;
+            padding: 10px;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
   <img src="./ghost.png" alt="" style="width:175px;height:200px;" id="ghost" onclick="addScore()">  
-  <h2 id="score">score:0</h2>
+  <div id="diff_sel">
+    <div> Select difficulty</div>
+    <button id ="Easy" onclick="setDifficulty(1)">1 Easy</button>
+    <button id ="Medium" onclick="setDifficulty(2)">2 Medium</button>
+    <button id ="Hard" onclick="setDifficulty(3)">3 Hard</button>
+    <button id ="Impossible" onclick="setDifficulty(4)">4 Impossible</button>
+  </div>
+  <h2 id="score">Score:0</h2>
   <h2 id="timer">Time left:</h2>
   <script>
-    var gameIsDone = false
-
-    var remainingTime = 15 // todo change to 0:xx
-    var userInput = prompt("type 1 for easy 2 for medium 3 for hard and 4 for impossible for dificulty")
-    var levelsec
-    console.log(userInput);
-    var finalScore = 0
-    if (userInput == "1") {
-        // easy level
+    function setDifficulty(params) {
+     if (params == 1) {
         levelsec = 800
-    } else if (userInput == "2") {
-       // medium level 
-       levelsec = 500
-    } else if  (userInput == "3"){
-       // hard level
-       levelsec =  300     
-      }  else if  (userInput == "4"){
-      // imposible level
-      levelsec = 100
-      } else {
-       levelsec = 950
-      }
-    
+     } else if (params == 2) {
+        levelsec = 500
+     } else if (params == 3) {
+        levelsec = 300
+     } else if (params == 4) {
+        levelsec = 100
+     }
+    }
+    var gameIsDone = false
+    var remainingTime = 15 // todo change to 0:xx
+    var levelsec
+    var finalScore = 0
+     
       function moveGhost(l, t) {
         document.getElementById("ghost").style.left = l + "px"
         document.getElementById("ghost").style.top = t + "px"
@@ -56,8 +76,6 @@
       }
 
       function randomLT(params) {
-        
-        
         if (gameIsDone == false) {
           // game is still going
           var left = Math.floor(Math. random() * (1000 - 1) + 1)
