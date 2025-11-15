@@ -26,13 +26,20 @@
             background-color: rgba(0, 0, 0, 0.5);
             display: block;
         }
-        
+        #hint{
+            position: absolute;
+            top: 300px;
+            left: 700px;
+            width: 400px;
+            height: 100px;
+        }
     </style>
 </head>
 <body bgcolor="Aqua">
     <h1> Welcome to Guess the Number.</h1>
     <div>I am thinking of a number 1-1000</div>
    <input type="number" id="number" onclick="pressearly()">
+    <div id="hint" onclick="rghl()"></div>
    <audio controls>
     <source src="Relaxing_Music.mp3" type="audio/mpeg">
   </audio>
@@ -44,15 +51,16 @@
             // getUserInput vs result
            
             if (document.getElementById("number").value > result ) {
-             alert("go lower")    
+             document.getElementById("hint").innerHTML = "Go Lower"    
             } else if((document.getElementById("number").value < result )) {
-             alert ("go higher")   
+                document.getElementById("hint").innerHTML = "Go Higher"
             } else{
-              alert ("you got it right in " + tries + " steps!")  
-              location.reload()
+                document.getElementById("hint").innerHTML = "You got it in " + tries + " tries! Click here to play again.";
             }
         }
-
+        function rghl() {
+           location.reload();
+        }
         function generatenumber() {            
             result = Math.floor(Math. random() * (1000 - 1) + 1)
         }
