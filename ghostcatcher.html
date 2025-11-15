@@ -32,6 +32,17 @@
             padding: 10px;
             border-radius: 10px;
         }
+        #finalScore {
+            display: none;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: lightgrey;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -43,9 +54,14 @@
     <button id ="Hard" onclick="setDifficulty(3)">3 Hard</button>
     <button id ="Impossible" onclick="setDifficulty(4)">4 Impossible</button>
   </div>
-  <h2 id="score">Score:0</h2>
+  <div id="finalScore" onclick="restart()">You scored <span id="finalScoreValue"></span>. Click here to play again</div>
+  <h2
+   id="score">Score:0</h2>
   <h2 id="timer">Time left:</h2>
   <script>
+    function restart() {
+      location.reload();
+    } 
     function setDifficulty(params) {
      if (params == 1) {
         levelsec = 800
@@ -56,7 +72,36 @@
      } else if (params == 4) {
         levelsec = 100
      }
-    }
+      document.getElementById("diff_sel").style.display = "none"
+      document.getElementById("ghost").style.display = "block"
+     let timerId = setInterval(() => {
+      timerText.innerHTML = remainingTime
+
+      remainingTime--
+      if (remainingTime == -1) {
+        clearInterval(timerId)
+      }
+    }, 1000);
+         let moveTimer = setInterval(() => {
+      randomLT()
+      if (gameIsDone == true) {
+        console.log("game is done now, should stop moving");
+        
+        clearInterval(moveTimer)
+      } else {
+        console.log("game is not done");
+        
+      }
+    }, levelsec);
+  
+    setTimeout(() => {
+        console.log("setting gameIsDone to true");
+        gameIsDone = true
+        document.getElementById("finalScore").style.display = "block"
+        document.getElementById("finalScoreValue").innerHTML = finalScore
+        document.getElementById("ghost").style.display = "none"
+      }, 17000);
+  }
     var gameIsDone = false
     var remainingTime = 15 // todo change to 0:xx
     var levelsec
@@ -86,35 +131,12 @@
         }
         
       }
-      setTimeout(() => {
-        console.log("setting gameIsDone to true");
-        
-        gameIsDone = true
-        alert("you scored " + finalScore + ". Click ok to play again")
-        location.reload()
-      }, 17000);
+      
         
     let timerText = document.getElementById("timer") 
-    let timerId = setInterval(() => {
-      timerText.innerHTML = remainingTime
+    
 
-      remainingTime--
-      if (remainingTime == -1) {
-        clearInterval(timerId)
-      }
-    }, 1000);
 
-    let moveTimer = setInterval(() => {
-      randomLT()
-      if (gameIsDone == true) {
-        console.log("game is done now, should stop moving");
-        
-        clearInterval(moveTimer)
-      } else {
-        console.log("game is not done");
-        
-      }
-    }, levelsec);
       
     
   </script>
