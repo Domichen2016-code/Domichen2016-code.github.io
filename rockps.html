@@ -68,7 +68,7 @@
             console.log("check" + leftChoice + rightChoice)
             if (leftChoice=="rock" && rightChoice=="rock") {
                 setTimeout(() => {
-                    alert("draw")
+                    document.getElementById("result").innerHTML = "Draw"
                 }, 200);
                 
                 imagesL("rock.png")
@@ -76,7 +76,7 @@
             }
             if (leftChoice=="scissor" && rightChoice=="scissor") {
                 setTimeout(() => {
-                    alert("draw")
+                    document.getElementById("result").innerHTML = "Draw"
                 }, 200);
              
              imagesL("scissors.jpg")
@@ -84,7 +84,7 @@
             }
             if  (leftChoice=="paper"  && rightChoice=="paper") {
                 setTimeout(() => {
-                    alert("draw")
+                    document.getElementById("result").innerHTML = "Draw"
                 }, 200);
              
              imagesL("paper.jpg")
@@ -93,14 +93,14 @@
             if  (leftChoice=="rock"   && rightChoice=="scissor"){
              
              setTimeout(() => {
-                alert("player1wins")
+                document.getElementById("result").innerHTML = "Player 1 wins"
                 }, 200);
              imagesL("rock.png")
              imagesR("scissors.jpg") 
             }
             if  (leftChoice=="rock"   && rightChoice=="paper"){
              setTimeout(() => {
-                alert("player2wins")   
+                document.getElementById("result").innerHTML = "Player 2 wins"   
                 }, 200);
 
              imagesL("rock.png")
@@ -109,7 +109,7 @@
             if  (leftChoice=="paper"   && rightChoice=="rock"){
              
              setTimeout(() => {
-                alert("player1wins")
+                document.getElementById("result").innerHTML = "Player 1 wins"
                 }, 200);
              imagesL("paper.jpg")
              imagesR("rock.png")
@@ -117,7 +117,7 @@
             if  (leftChoice=="paper"   && rightChoice=="scissor"){
              
              setTimeout(() => {
-                alert("player2wins")
+                document.getElementById("result").innerHTML = "Player 2 wins"
                 }, 200);
              imagesL("paper.jpg")
              imagesR("scissors.jpg")
@@ -125,7 +125,7 @@
             if  (leftChoice=="scissor"   && rightChoice=="rock"){
              
              setTimeout(() => {
-                alert("player2wins")
+                document.getElementById("result").innerHTML = "Player 2 wins"
                 }, 200);
              imagesL("scissors.jpg")
              imagesR("rock.png")
@@ -133,7 +133,7 @@
             if  (leftChoice=="scissor"   && rightChoice=="paper"){
              
              setTimeout(() => {
-                alert("player1wins")
+              document.getElementById("result").innerHTML = "player 1 wins"
                 }, 200);
              imagesL("scissors.jpg")
              imagesR("paper.jpg")
@@ -179,14 +179,14 @@
         <source src="Relaxing_Music.mp3" type="audio/mpeg">
         Your browser does not support the audio tag.
       </audio>
-   <h1 id="p1">player1</h1> 
-   <h1 id="p2">player2</h1>
+   <h1 id="p1">Player1</h1> 
+   <h1 id="p2">Player2</h1>
    <img id="leftpic" src="./cloud.jpeg" alt="">
    <img id="rightpic" src="./cloud.jpeg" alt="">
    <div id="btrestart">
-    <div onclick="refreshTheGame()">click here to play again </div>
+    <div onclick="refreshTheGame()">Click here to play again </div>
     <button onclick="gohome()">Back to Main Page</button>
-
+    <div id="result" onclick="rg()"></div>
 </div>
 </body>
 </html>
