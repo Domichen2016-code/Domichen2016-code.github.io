@@ -6,6 +6,12 @@
     <link rel="icon" type="image/x-icon" href="Favicon.png">
     <title>Battleship</title>
     <style>
+        #msg{
+            position: absolute;
+            top: 50%;
+            left: 70%;
+            font-size: 40px;
+        }
         .box{
             width: 60px;
             height: 60px;
@@ -58,11 +64,11 @@
         var selectedDifficulty = 0;
         var tries = 0;
         var noclickstart = [
-            "Game not started.Click start to start your game",
-            "I said game not started.Click start to start your game",
-            "Game not started Are you not listening to me?Click start to start your game",
-            "If you do this again I am going to be very mad.Click start to start your game",
-            "Stop it game not started!Click start to start your game",
+            "Game not started. Click start to start your game",
+            "I said game not started. Click start to start your game",
+            "Game not started. Are you not listening to me? Click start to start your game",
+            "If you do this again I am going to be very mad. Click start to start your game",
+            "Stop it game not started! Click start to start your game",
             "I will ignore you next time you do this! Click start to start your game"
         ]
         var gameendyoulost = false
@@ -76,16 +82,17 @@
 
           if (igs==false) {
             if (msgix<6) {
-                alert(noclickstart[msgix])
+                document.getElementById("msg").innerHTML = noclickstart[msgix]
                 msgix++
             }
           } else {
             if (ils==false) {
-                alert("Select Difficulty Level Please")
+                document.getElementById("msg").innerHTML = "Select Difficulty Level Please"
             } else {
+                document.getElementById("msg").innerHTML = "Game started. Find all the ships and enjoy!"
                 tries++
                 if (tries == selectedDifficulty) {
-                    alert("Sorry you lost You haven't bombed all the ships in " + selectedDifficulty +" tries")
+                    document.getElementById("msg").innerHTML = "Sorry you lost You haven't bombed all the ships in " + selectedDifficulty +" tries"
                     gameendyoulost = true
 
                     document.getElementById("rg").style.display = "block"
@@ -110,6 +117,20 @@
                     var audio = new Audio('Explody_Battleship.mp3');
                     audio.play();   
                     document.getElementById("hitomiss").innerHTML = "Hit!";
+                    if (findremainingships() == 0) {
+                        document.getElementById("msg").innerHTML = "Congratulations you won! You found all the ships in " + tries + " tries"
+                        gameendyoulost = true
+                        document.getElementById("rg").style.display = "block"
+
+                        // Select the elements with the class
+                        const elements = document.querySelectorAll(".box");
+
+                        // Change the color of each element
+                        elements.forEach(element => {
+                        element.style.color = "green";
+                        }); 
+                    }
+                    
                 } else {
                     var oImg = document.createElement("img");
                     oImg.setAttribute('src', 'battleship_splash.jpg');
@@ -124,8 +145,21 @@
             }
           }  
         }
+
+        function findremainingships() {
+            var remainingShips = 0
+            for (var r=0;r<10;r++) {
+                for (var c=0;c<10;c++) {
+                    if (document.getElementById("b"+r+c).innerHTML == "x") {
+                        remainingShips++
+                    }
+                }
+            }
+            return remainingShips
+        }
+
         function sg() {
-          alert("Please select difficulty level")
+          document.getElementById("msg").innerHTML = "Please select difficulty level"
           igs = true  
           document.getElementById("sb").style.display = "none"
           document.getElementById("dfl").style.display = "block"
@@ -152,7 +186,7 @@
         function g5() {
             selectedDifficulty = EASY_TRIES
             console.log("easy mode");
-            alert("Game Started.Now Find The 5 Ships!")
+            document.getElementById("msg").innerHTML = "Game Started.Now Find The 5 Ships!"
             document.getElementById("soe").style.display = "none"
             document.getElementById("som").style.display = "none"
             document.getElementById("soh").style.display = "none"   
@@ -183,7 +217,7 @@
         function g7() {
             selectedDifficulty = MEDIUM_TRIES
             console.log("medium mode");
-            alert("Game Started.Now Find The 7 Ships!")
+            document.getElementById("msg").innerHTML = "Game Started.Now Find The 7 Ships!"
             document.getElementById("soe").style.display = "none"
             document.getElementById("som").style.display = "none"
             document.getElementById("soh").style.display = "none"   
@@ -225,7 +259,7 @@
         function g10() {
             selectedDifficulty = HARD_TRIES
             console.log("hard mode");
-            alert("Game Started.Now Find The 10 Ships!")
+            document.getElementById("msg").innerHTML = "Game Started.Now Find The 10 Ships!"
             document.getElementById("soe").style.display = "none"
             document.getElementById("som").style.display = "none"
             document.getElementById("soh").style.display = "none"   
@@ -635,6 +669,7 @@
     </script>
 </head>
 <body>
+ <div id="msg"></div>   
 <div id="hitomiss"></div>
 <div id="sb" onclick="sg()">start</div>
 <div id="rg" >
