@@ -14,6 +14,20 @@
             background-position: center;
             background-attachment: fixed; 
         }
+        #number_of_players{
+            position: absolute;
+            top: 200px;
+            left: 700px;
+            width: 400px;
+            height: 200px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            text-align: center;
+        }
         #board{
             display: none;
         }
@@ -86,6 +100,7 @@
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: none;
         }
         #box0{
             background-color: rgba(173, 216, 230, 0.563);
@@ -412,7 +427,20 @@
         #car, #cat, #hat, #horse, #siren {
             display: none;
         }
-        
+        #player_names_input{
+            position: absolute;
+            top: 300px;
+            left: 700px;
+            width: 400px;
+            height: auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            text-align: center;
+        }
        
     </style>
     <script>
@@ -478,18 +506,18 @@
             "Game Over! Thanks for playing Monopoly."
         ];
         let userInput = "";
-        while(userInput != "2" && userInput != "3" && userInput != "4" && userInput != "5") {
-            userInput = prompt("Welcome to monopoly. How many players will play? (2-5)")
-        }
+       // while(userInput != "2" && userInput != "3" && userInput != "4" && userInput != "5") {
+            // userInput = prompt("Welcome to monopoly. How many players will play? (2-5)")
+        //}
         let no_of_players = parseInt(userInput);
         let allPlayers = [];
         var whoIsPlaying = 0;
         for (let i = 0; i < no_of_players; i++) {
-            let playerName = prompt("Enter the name of player " + (i + 1) + ": ");
+            //let playerName = prompt("Enter the name of player " + (i + 1) + ": ");
             playerName = playerName.trim();
             while (playerName === "" || nameExists(playerName)) {
                 if (playerName === "") {
-                   playerName = prompt("Empty Username Please type username for Monopoly " + (i + 1));
+                //   playerName = prompt("Empty Username Please type username for Monopoly " + (i + 1));
                    playerName = playerName.trim();
                 } else {
                     playerName = prompt("Player " + (i + 1) + " Username already exists. Please choose a different username.");
@@ -737,9 +765,52 @@
             
             
         }
+        function setPlayers(num) {
+            no_of_players = num;
+            document.getElementById("number_of_players").style.display = "none";
+            document.getElementById("CharacterSelection").style.display = "block";
+            showRemainingTokens();
+            document.getElementById("player_names_input").style.display = "block";
+            document.getElementById("CharacterSelection").style.display = "none";
+            if (num == 2) {
+                document.getElementById("player3_name").style.display = "none";
+                document.getElementById("player4_name").style.display = "none";
+                document.getElementById("player5_name").style.display = "none";
+            } else if (num == 3) {
+                document.getElementById("player4_name").style.display = "none";
+                document.getElementById("player5_name").style.display = "none";
+            } else if (num == 4) {
+                document.getElementById("player5_name").style.display = "none";
+            }
+        }
+
+        function confirmnames() {
+            if (document.getElementById("player1_name").innerHTML == "") {
+                document.getElementById("player1_name").innerHTML = "Please enter all player names.";
+            }
+        }
         </script>
 </head>
 <body>
+    <div id="number_of_players">
+        <div id="msgtitle">How many players? 2-5</div>
+        <button onclick="setPlayers(2)">2 Players</button>
+        <button onclick="setPlayers(3)">3 Players</button>
+        <button onclick="setPlayers(4)">4 Players</button>
+        <button onclick="setPlayers(5)">5 Players</button>
+    </div>
+    <div id="player_names_input" style="display:none;">
+        <div> Please enter all players name </div>
+        <div id="names_container">
+        <br><input type="text" id="player1_name" placeholder="Player 1 Name"> <br> <br>
+            <input type="text" id="player2_name" placeholder="Player 2 Name"> <br> <br>
+            <input type="text" id="player3_name" placeholder="Player 3 Name"> <br> <br>
+            <input type="text" id="player4_name" placeholder="Player 4 Name"> <br> <br>
+            <input type="text" id="player5_name" placeholder="Player 5 Name"> 
+        </div>
+        <button onclick="confirmnames()">Confirm Names</button>
+    </div>
+
     <div id="board">
         <div id="ActiveMessage"></div>
         <div id="AllUserInfo"></div>
@@ -809,7 +880,7 @@
     </div>
 
     <script>
-        document.getElementById("activePlayer").innerHTML = allPlayers[whoIsChoosing - 1].name;
+        // document.getElementById("activePlayer").innerHTML = allPlayers[whoIsChoosing - 1].name;
         function showRemainingTokens() {
             document.getElementById("cat").style.display = "none";
             document.getElementById("car").style.display = "none";
