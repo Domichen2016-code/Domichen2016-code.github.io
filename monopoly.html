@@ -505,38 +505,33 @@
             "You passed Go! Collect $200.",
             "Game Over! Thanks for playing Monopoly."
         ];
-        let userInput = "";
-       // while(userInput != "2" && userInput != "3" && userInput != "4" && userInput != "5") {
-            // userInput = prompt("Welcome to monopoly. How many players will play? (2-5)")
-        //}
-        let no_of_players = parseInt(userInput);
+        let no_of_players = 2;
         let allPlayers = [];
         var whoIsPlaying = 0;
-        for (let i = 0; i < no_of_players; i++) {
-            //let playerName = prompt("Enter the name of player " + (i + 1) + ": ");
-            playerName = playerName.trim();
-            while (playerName === "" || nameExists(playerName)) {
-                if (playerName === "") {
-                //   playerName = prompt("Empty Username Please type username for Monopoly " + (i + 1));
-                   playerName = playerName.trim();
-                } else {
-                    playerName = prompt("Player " + (i + 1) + " Username already exists. Please choose a different username.");
-                    playerName = playerName.trim();
-                }
-            }
-            console.log("user has typed " + playerName);
-            let newPlayer = {
-                name: `${playerName}`,
-                money: 1500,
-                position: 0,
-                properties: [],
-                inJail: false,
-                jailTurns: 0,
-                token: null
-            };
-            allPlayers.push(newPlayer);
-        }
-        console.log(allPlayers);
+        // for (let i = 0; i < no_of_players; i++) {
+        //     //let playerName = prompt("Enter the name of player " + (i + 1) + ": ");
+        //     playerName = playerName.trim();
+        //     while (playerName === "" || nameExists(playerName)) {
+        //         if (playerName === "") {
+        //         //   playerName = prompt("Empty Username Please type username for Monopoly " + (i + 1));
+        //            playerName = playerName.trim();
+        //         } else {
+        //             playerName = prompt("Player " + (i + 1) + " Username already exists. Please choose a different username.");
+        //             playerName = playerName.trim();
+        //         }
+        //     }
+        //     console.log("user has typed " + playerName);
+        //     let newPlayer = {
+        //         name: `${playerName}`,
+        //         money: 1500,
+        //         position: 0,
+        //         properties: [],
+        //         inJail: false,
+        //         jailTurns: 0,
+        //         token: null
+        //     };
+        //     allPlayers.push(newPlayer);
+        // }
         function nameExists(name) {
             return allPlayers.some(player => player.name === name);
         }
@@ -785,9 +780,226 @@
         }
 
         function confirmnames() {
-            if (document.getElementById("player1_name").innerHTML == "") {
-                document.getElementById("player1_name").innerHTML = "Please enter all player names.";
+            console.log("Names printed");
+
+            if(no_of_players == 2) {
+                if (document.getElementById("player1_name").value == "" && document.getElementById("player2_name").value == "") {
+                    document.getElementById("Namestitle").innerHTML = "Please enter both Player 1 and Player 2 names.";  
+                } else if (document.getElementById("player1_name").value == "") {
+                    document.getElementById("Namestitle").innerHTML = "Please enter Player 1 name.";
+                } else if (document.getElementById("player2_name").value == "") {
+                    document.getElementById("Namestitle").innerHTML = "Please enter Player 2 name.";
+                } else {    
+                    console.log("both are there");
+                    // Save names and select characters
+                    let newPlayer1 = {
+                        name: `${document.getElementById("player1_name").value}`,
+                        money: 1500,
+                        position: 0,
+                        properties: [],
+                        inJail: false,
+                        jailTurns: 0,
+                        token: null
+                    };
+                    allPlayers.push(newPlayer1);
+                    let newPlayer2 = {
+                        name: `${document.getElementById("player2_name").value}`,
+                        money: 1500,
+                        position: 0,
+                        properties: [],
+                        inJail: false,
+                        jailTurns: 0,
+                        token: null
+                    };
+                    allPlayers.push(newPlayer2);
+                    document.getElementById("player_names_input").style.display = "none";
+                }
+                } else if(no_of_players == 3) {
+                if (document.getElementById("player1_name").value == "" && document.getElementById("player2_name").value == "" && document.getElementById("player3_name").value == "") {
+                    document.getElementById("Namestitle").innerHTML = "Please enter all three player names.";
+                } else if (document.getElementById("player1_name").value == "") {
+                    document.getElementById("Namestitle").innerHTML = "Please enter Player 1 name.";
+                } else if (document.getElementById("player2_name").value == "") {
+                    document.getElementById("Namestitle").innerHTML = "Please enter Player 2 name.";
+                } else if (document.getElementById("player3_name").value == "") {
+                    document.getElementById("Namestitle").innerHTML = "Please enter Player 3 name.";
+                } else {
+                    console.log("all three are there");
+                    // Save names and select characters
+                    let newPlayer1 = {
+                        name: `${document.getElementById("player1_name").value}`,
+                        money: 1500,
+                        position: 0,
+                        properties: [],
+                        inJail: false,
+                        jailTurns: 0,
+                        token: null
+                    };
+                    allPlayers.push(newPlayer1);
+                    let newPlayer2 = {
+                        name: `${document.getElementById("player2_name").value}`,
+                        money: 1500,
+                        position: 0,
+                        properties: [],
+                        inJail: false,
+                        jailTurns: 0,
+                        token: null
+                    };
+                    allPlayers.push(newPlayer2);
+                    let newPlayer3 = {
+                        name: `${document.getElementById("player3_name").value}`,
+                        money: 1500,
+                        position: 0,
+                        properties: [],
+                        inJail: false,
+                        jailTurns: 0,
+                        token: null
+                    };
+                    allPlayers.push(newPlayer3);
+                    document.getElementById("player_names_input").style.display = "none";
+                }
+              } else if(no_of_players == 4) {
+                if (document.getElementById("player1_name").value == "" && document.getElementById("player2_name").value == "" && document.getElementById("player3_name").value == "" && document.getElementById("player4_name").value == "") {
+                    document.getElementById("Namestitle").innerHTML = "Please enter all four player names.";
+                } else if (document.getElementById("player1_name").value == "") {
+                    document.getElementById("Namestitle").innerHTML = "Please enter Player 1 name.";
+                } else if (document.getElementById("player2_name").value == "") {
+                    document.getElementById("Namestitle").innerHTML = "Please enter Player 2 name.";
+                } else if (document.getElementById("player3_name").value == "") {
+                    document.getElementById("Namestitle").innerHTML = "Please enter Player 3 name.";
+                } else if (document.getElementById("player4_name").value == "") {
+                    document.getElementById("Namestitle").innerHTML = "Please enter Player 4 name.";
+                } else {
+                    console.log("all four are there");
+                    // Save names and select characters
+                    let newPlayer1 = {
+                        name: `${document.getElementById("player1_name").value}`,
+                        money: 1500,
+                        position: 0,
+                        properties: [],
+                        inJail: false,
+                        jailTurns: 0,
+                        token: null
+                    };
+                    allPlayers.push(newPlayer1);
+                    let newPlayer2 = {
+                        name: `${document.getElementById("player2_name").value}`,
+                        money: 1500,
+                        position: 0,
+                        properties: [],
+                        inJail: false,
+                        jailTurns: 0,
+                        token: null
+                    };
+                    allPlayers.push(newPlayer2);
+                    let newPlayer3 = {
+                        name: `${document.getElementById("player3_name").value}`,
+                        money: 1500,
+                        position: 0,
+                        properties: [],
+                        inJail: false,
+                        jailTurns: 0,
+                        token: null
+                    };
+                    allPlayers.push(newPlayer3);
+                    let newPlayer4 = {
+                        name: `${document.getElementById("player4_name").value}`,
+                        money: 1500,
+                        position: 0,
+                        properties: [],
+                        inJail: false,
+                        jailTurns: 0,
+                        token: null
+                    };
+                    allPlayers.push(newPlayer4);
+                    document.getElementById("player_names_input").style.display = "none";
+                }
+             } else if(no_of_players == 5) {
+                if (document.getElementById("player1_name").value == "" && document.getElementById("player2_name").value == "" && document.getElementById("player3_name").value == "" && document.getElementById("player4_name").value == "" && document.getElementById("player5_name").value == "") {
+                    document.getElementById("Namestitle").innerHTML = "Please enter all five player names.";
+                } else if (document.getElementById("player1_name").value == "") {
+                    document.getElementById("Namestitle").innerHTML = "Please enter Player 1 name.";
+                } else if (document.getElementById("player2_name").value == "") {
+                    document.getElementById("Namestitle").innerHTML = "Please enter Player 2 name.";
+                } else if (document.getElementById("player3_name").value == "") {
+                    document.getElementById("Namestitle").innerHTML = "Please enter Player 3 name.";
+                } else if (document.getElementById("player4_name").value == "") {
+                    document.getElementById("Namestitle").innerHTML = "Please enter Player 4 name.";
+                } else if (document.getElementById("player5_name").value == "") {
+                    document.getElementById("Namestitle").innerHTML = "Please enter Player 5 name.";
+                } else {
+                    console.log("all five are there");
+                    // Save names and select characters
+                    let newPlayer1 = {
+                        name: `${document.getElementById("player1_name").value}`,
+                        money: 1500,
+                        position: 0,
+                        properties: [],
+                        inJail: false,
+                        jailTurns: 0,
+                        token: null
+                    };
+                    allPlayers.push(newPlayer1);
+                    let newPlayer2 = {
+                        name: `${document.getElementById("player2_name").value}`,
+                        money: 1500,
+                        position: 0,
+                        properties: [],
+                        inJail: false,
+                        jailTurns: 0,
+                        token: null
+                    };
+                    allPlayers.push(newPlayer2);
+                    let newPlayer3 = {
+                        name: `${document.getElementById("player3_name").value}`,
+                        money: 1500,
+                        position: 0,
+                        properties: [],
+                        inJail: false,
+                        jailTurns: 0,
+                        token: null
+                    };
+                    allPlayers.push(newPlayer3);
+                    let newPlayer4 = {
+                        name: `${document.getElementById("player4_name").value}`,
+                        money: 1500,
+                        position: 0,
+                        properties: [],
+                        inJail: false,
+                        jailTurns: 0,
+                        token: null
+                    };
+                    allPlayers.push(newPlayer4);
+                    let newPlayer5 = {
+                        name: `${document.getElementById("player5_name").value}`,
+                        money: 1500,
+                        position: 0,
+                        properties: [],
+                        inJail: false,
+                        jailTurns: 0,
+                        token: null
+                    };
+                    allPlayers.push(newPlayer5);
+                    document.getElementById("player_names_input").style.display = "none";
+                }
+
             }
+            
+            // if (document.getElementById("player1_name").value == "") {
+            //     document.getElementById("player1_name").innerHTML = "Please enter Player 1 name.";
+            // } else if (document.getElementById("player2_name").value == "") {
+            //     document.getElementById("player2_name").innerHTML = "Please enter Player 2 name.";
+            // } else if (document.getElementById("player3_name").value == "") {
+            //     document.getElementById("player3_name").innerHTML = "Please enter Player 3 name.";
+            // } else if (document.getElementById("player4_name").value == "") {
+            //     document.getElementById("player4_name").innerHTML = "Please enter Player 4 name.";
+            // } else if (document.getElementById("player5_name").value == "") {
+            //     document.getElementById("player5_name").innerHTML = "Please enter Player 5 name.";
+            // } else {
+            //     document.getElementById("player_names_input").style.display = "none";
+            //     document.getElementById("CharacterSelection").style.display = "block";
+            //     document.getElementById("activePlayer").innrHTML = allPlayers[whoIsChoosing - 1].name;
+            // }
         }
         </script>
 </head>
@@ -800,7 +1012,7 @@
         <button onclick="setPlayers(5)">5 Players</button>
     </div>
     <div id="player_names_input" style="display:none;">
-        <div> Please enter all players name </div>
+        <div id="Namestitle"> Please enter all players name </div>
         <div id="names_container">
         <br><input type="text" id="player1_name" placeholder="Player 1 Name"> <br> <br>
             <input type="text" id="player2_name" placeholder="Player 2 Name"> <br> <br>
