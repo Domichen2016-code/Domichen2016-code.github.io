@@ -508,30 +508,6 @@
         let no_of_players = 2;
         let allPlayers = [];
         var whoIsPlaying = 0;
-        // for (let i = 0; i < no_of_players; i++) {
-        //     //let playerName = prompt("Enter the name of player " + (i + 1) + ": ");
-        //     playerName = playerName.trim();
-        //     while (playerName === "" || nameExists(playerName)) {
-        //         if (playerName === "") {
-        //         //   playerName = prompt("Empty Username Please type username for Monopoly " + (i + 1));
-        //            playerName = playerName.trim();
-        //         } else {
-        //             playerName = prompt("Player " + (i + 1) + " Username already exists. Please choose a different username.");
-        //             playerName = playerName.trim();
-        //         }
-        //     }
-        //     console.log("user has typed " + playerName);
-        //     let newPlayer = {
-        //         name: `${playerName}`,
-        //         money: 1500,
-        //         position: 0,
-        //         properties: [],
-        //         inJail: false,
-        //         jailTurns: 0,
-        //         token: null
-        //     };
-        //     allPlayers.push(newPlayer);
-        // }
         function nameExists(name) {
             return allPlayers.some(player => player.name === name);
         }
@@ -753,6 +729,10 @@
                 console.log("dice rolled are " + d1 + " and " + d2);
                 var totalSteps = parseInt(d1) + parseInt(d2);
                 console.log(boxesProperties[totalSteps].name);
+                var targetBoxLeft = document.getElementById("box"+totalSteps).getBoundingClientRect().left;
+                var targetBoxTop = document.getElementById("box"+totalSteps).getBoundingClientRect().top;
+                
+
                 document.getElementById("Dice1").src = "Dice" + d1 + ".png";
                 document.getElementById("Dice2").src = "Dice" + d2 + ".png";
                 document.getElementById("Roll").innerHTML = "Roll";
@@ -814,7 +794,7 @@
                     allPlayers.push(newPlayer2);
                     document.getElementById("player_names_input").style.display = "none";
                 }
-                } else if(no_of_players == 3) {
+            } else if(no_of_players == 3) {
                 if (document.getElementById("player1_name").value == "" && document.getElementById("player2_name").value == "" && document.getElementById("player3_name").value == "") {
                     document.getElementById("Namestitle").innerHTML = "Please enter all three player names.";
                 } else if (document.getElementById("player1_name").value == "") {
@@ -858,7 +838,7 @@
                     allPlayers.push(newPlayer3);
                     document.getElementById("player_names_input").style.display = "none";
                 }
-              } else if(no_of_players == 4) {
+            } else if(no_of_players == 4) {
                 if (document.getElementById("player1_name").value == "" && document.getElementById("player2_name").value == "" && document.getElementById("player3_name").value == "" && document.getElementById("player4_name").value == "") {
                     document.getElementById("Namestitle").innerHTML = "Please enter all four player names.";
                 } else if (document.getElementById("player1_name").value == "") {
@@ -914,7 +894,7 @@
                     allPlayers.push(newPlayer4);
                     document.getElementById("player_names_input").style.display = "none";
                 }
-             } else if(no_of_players == 5) {
+            } else if(no_of_players == 5) {
                 if (document.getElementById("player1_name").value == "" && document.getElementById("player2_name").value == "" && document.getElementById("player3_name").value == "" && document.getElementById("player4_name").value == "" && document.getElementById("player5_name").value == "") {
                     document.getElementById("Namestitle").innerHTML = "Please enter all five player names.";
                 } else if (document.getElementById("player1_name").value == "") {
@@ -984,22 +964,8 @@
                 }
 
             }
-            
-            // if (document.getElementById("player1_name").value == "") {
-            //     document.getElementById("player1_name").innerHTML = "Please enter Player 1 name.";
-            // } else if (document.getElementById("player2_name").value == "") {
-            //     document.getElementById("player2_name").innerHTML = "Please enter Player 2 name.";
-            // } else if (document.getElementById("player3_name").value == "") {
-            //     document.getElementById("player3_name").innerHTML = "Please enter Player 3 name.";
-            // } else if (document.getElementById("player4_name").value == "") {
-            //     document.getElementById("player4_name").innerHTML = "Please enter Player 4 name.";
-            // } else if (document.getElementById("player5_name").value == "") {
-            //     document.getElementById("player5_name").innerHTML = "Please enter Player 5 name.";
-            // } else {
-            //     document.getElementById("player_names_input").style.display = "none";
-            //     document.getElementById("CharacterSelection").style.display = "block";
-            //     document.getElementById("activePlayer").innrHTML = allPlayers[whoIsChoosing - 1].name;
-            // }
+            document.getElementById("CharacterSelection").style.display = "block";
+            document.getElementById("activePlayer").innerHTML = allPlayers[whoIsChoosing - 1].name;
         }
         </script>
 </head>
