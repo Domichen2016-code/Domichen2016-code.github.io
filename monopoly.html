@@ -49,13 +49,40 @@
             top: 10px;
             left: 10px;
             width: 300px;
-            height: 300px;
+            height: 200px;
             background-color: rgba(186, 37, 37, 0.8);
             border-radius: 10px;
             padding: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             font-family: Arial, sans-serif;
             font-size: 16px;
+        }
+        #BuyOrNotBuy{
+            position: absolute;
+            top: 320px;
+            left: 10px;
+            width: 300px;
+            height: 100px;
+            background-color: rgba(224, 129, 40, 0.8);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(145, 188, 147, 0.2);
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+        #EndTurn{
+            position: absolute;
+            top: 480px;
+            left: 50px;
+            width: 100px;
+            height: 40px;
+            background-color: rgba(0, 0, 255, 0.8);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            cursor: pointer;
         }
         #Roll{
             position: absolute;
@@ -445,45 +472,45 @@
     </style>
     <script>
         var boxesProperties = {
-            1: {name: "Mediterranean Ave", price: 60, rent: 2},
-            2: {name: "Community Chest 1"},
-            3: {name: "Baltic Ave", price: 60, rent: 4},
-            4: {name: "Income Tax", price: 200},
-            5: {name: "Reading Railroad", price: 200, rent: 25},
-            6: {name: "Oriental Ave", price: 100, rent: 6},
-            7: {name: "Chance 1"},
-            8: {name: "Vermont Ave", price: 100, rent: 6},
-            9: {name: "Connecticut Ave", price: 120, rent: 8},
-            10: {name: "Jail / Just Visiting"},
-            11: {name: "St. Charles Place", price: 140, rent: 10},
-            12: {name: "Electric Company", price: 150, rent: 4},
-            13: {name: "States Ave", price: 140, rent: 10},
-            14: {name: "Virginia Ave", price: 160, rent: 12},
-            15: {name: "Pennsylvania Railroad", price: 200, rent: 25},
-            16: {name: "St. James Place", price: 180, rent: 14},
-            17: {name: "Community Chest 2"},
-            18: {name: "Tennessee Ave", price: 180, rent: 14},
-            19: {name: "New York Ave", price: 200, rent: 16},
-            20: {name: "Free Parking"},
-            21: {name: "Kentucky Ave", price: 220, rent: 18},
-            22: {name: "Chance 2"},
-            23: {name: "Indiana Ave", price: 220, rent: 18},
-            24: {name: "Illinois Ave", price: 240, rent: 20},
-            25: {name: "B & O Railroad", price: 200, rent: 25},
-            26: {name: "Atlantic Ave", price: 260, rent: 22},
-            27: {name: "Ventnor Ave", price: 260, rent: 22},
-            28: {name: "Water Works", price: 150, rent: 4},
-            29: {name: "Marvin Gardens", price: 280, rent: 24},
-            30: {name: "Go To Jail"},
-            31: {name: "Pacific Ave", price: 300, rent: 26},
-            32: {name: "North Carolina Ave", price: 300, rent: 26},
-            33: {name: "Community Chest 3"},
-            34: {name: "Pennsylvania Ave", price: 320, rent: 28},
-            35: {name: "Short Line", price: 200, rent: 25},
-            36: {name: "Chance 3"},
-            37: {name: "Park Place", price: 350, rent: 35},
-            38: {name: "Luxury Tax", price: 100},
-            39: {name: "Boardwalk", price: 400, rent: 50},
+            1: {name: "Mediterranean Ave", price: 60, rent: 2, ownerable: true, owner:null},
+            2: {name: "Community Chest 1", ownerable: false},
+            3: {name: "Baltic Ave", price: 60, rent: 4, ownerable: true, owner:null},
+            4: {name: "Income Tax", price: 200, ownerable: false},
+            5: {name: "Reading Railroad", price: 200, rent: 25, ownerable: true, owner:null},
+            6: {name: "Oriental Ave", price: 100, rent: 6, ownerable: true, owner:null},
+            7: {name: "Chance 1", ownerable: false},
+            8: {name: "Vermont Ave", price: 100, rent: 6, ownerable: true, owner:null},
+            9: {name: "Connecticut Ave", price: 120, rent: 8, ownerable: true, owner:null},
+            10: {name: "Jail / Just Visiting", ownerable: false},
+            11: {name: "St. Charles Place", price: 140, rent: 10, ownerable: true, owner:null},
+            12: {name: "Electric Company", price: 150, rent: 4, ownerable: true, owner:null},
+            13: {name: "States Ave", price: 140, rent: 10, ownerable: true, owner:null},
+            14: {name: "Virginia Ave", price: 160, rent: 12, ownerable: true, owner:null},
+            15: {name: "Pennsylvania Railroad", price: 200, rent: 25, ownerable: true, owner:null},
+            16: {name: "St. James Place", price: 180, rent: 14, ownerable: true, owner:null},
+            17: {name: "Community Chest 2", ownerable: false},
+            18: {name: "Tennessee Ave", price: 180, rent: 14, ownerable: true, owner:null},
+            19: {name: "New York Ave", price: 200, rent: 16, ownerable: true, owner:null},
+            20: {name: "Free Parking", ownerable: false},
+            21: {name: "Kentucky Ave", price: 220, rent: 18, ownerable: true, owner:null},
+            22: {name: "Chance 2", ownerable: false},
+            23: {name: "Indiana Ave", price: 220, rent: 18, ownerable: true, owner:null},
+            24: {name: "Illinois Ave", price: 240, rent: 20, ownerable: true, owner:null},
+            25: {name: "B & O Railroad", price: 200, rent: 25, ownerable: true, owner:null},
+            26: {name: "Atlantic Ave", price: 260, rent: 22, ownerable: true, owner:null},
+            27: {name: "Ventnor Ave", price: 260, rent: 22, ownerable: true, owner:null},
+            28: {name: "Water Works", price: 150, rent: 4, ownerable: true, owner:null},
+            29: {name: "Marvin Gardens", price: 280, rent: 24, ownerable: true, owner:null},
+            30: {name: "Go To Jail" , ownerable: false},
+            31: {name: "Pacific Ave", price: 300, rent: 26, ownerable: true, owner:null},
+            32: {name: "North Carolina Ave", price: 300, rent: 26, ownerable: true, owner:null},
+            33: {name: "Community Chest 3", ownerable: false},
+            34: {name: "Pennsylvania Ave", price: 320, rent: 28, ownerable: true, owner:null},
+            35: {name: "Short Line", price: 200, rent: 25, ownerable: true, owner:null},
+            36: {name: "Chance 3", ownerable: false},
+            37: {name: "Park Place", price: 350, rent: 35, ownerable: true, owner:null},
+            38: {name: "Luxury Tax", price: 100, ownerable: false},
+            39: {name: "Boardwalk", price: 400, rent: 50, ownerable: true, owner:null},
         
         }
 
@@ -727,6 +754,7 @@
             }, 200);
             document.getElementById("Roll").innerHTML = "Stop";
             }  else {
+                showUserInfo();
                 clearInterval(diceRolling);
                 var d1 = document.getElementById("Dice1").src.at(-5);
                 var d2 = document.getElementById("Dice2").src.at(-5);
@@ -995,6 +1023,41 @@
             document.getElementById("CharacterSelection").style.display = "block";
             document.getElementById("activePlayer").innerHTML = allPlayers[whoIsChoosing - 1].name;
         }
+        function buyProperty() {
+            console.log("Property buy");
+            const player = allPlayers[whoIsPlaying];
+            const property = boxesProperties[player.position];
+            if (property.ownerable == false) {
+                console.log("This property cannot be purchased.");
+                return;
+            }
+
+            if (property.owner != null) {
+                console.log("This property is already owned by " + property.owner + ".");
+                return;
+            }
+
+            if (property && property.price) {
+
+
+                if (player.money >= property.price) {
+                    player.money -= property.price;
+                    player.properties.push(property.name);
+                    property.owner = player.name;
+                    console.log(player.name + " bought " + property.name + " for $" + property.price);
+                } else {
+                    console.log(player.name + " does not have enough money to buy " + property.name);
+                }
+            } else {
+                console.log("This is not a purchasable property.");
+            }
+        }
+        function doNotBuyProperty() {
+            console.log("Property not bought");
+        }
+        function endTurn() {
+            console.log("Turn ended");
+        }
         </script>
 </head>
 <body>
@@ -1020,6 +1083,15 @@
     <div id="board">
         <div id="ActiveMessage"></div>
         <div id="AllUserInfo"></div>
+        <div id="BuyOrNotBuy">
+            <span>Would you like to buy this property?</span>
+            <br>
+            <button onclick="buyProperty()">Buy</button>
+            <button onclick="doNotBuyProperty()">Skip</button>
+        </div>
+        <button id="EndTurn" onclick="endTurn()">
+            End Turn
+        </button>
         <img src="DiceEmpty.png" id="Dice1">
         <img src="DiceEmpty.png" id="Dice2">
         <div id="Roll" onclick="RollStopDice()">Roll</div>
