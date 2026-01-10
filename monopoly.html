@@ -490,7 +490,7 @@
         var whoIsChoosing = 1;
         var availableTokens = ['car', 'cat', 'hat', 'horse', 'siren'];
         var actionMessages = [
-            "Roll the dice to start your journey!",
+            "Roll the dice",
             "You landed on a property. Would you like to buy it?",
             "You rolled a double! Roll again.",
             "Go to Jail! Do not pass Go, do not collect $200.",
@@ -520,7 +520,7 @@
             curerentToken = token;
         }
         function showUserInfo() {
-            document.getElementById("ActiveMessage").innerHTML = "Who is playing: " + allPlayers[whoIsPlaying].name + "<br>" + actionMessages[0]; ;
+            document.getElementById("ActiveMessage").innerHTML = "Who is playing: " + allPlayers[whoIsPlaying].name + "<br>" + actionMessages[0];
             for (let index = 0; index < allPlayers.length; index++) {
                 const player = allPlayers[index];
             }
@@ -558,7 +558,8 @@
 
                     img.style.right = right + "px";
                     document.body.appendChild(img);
-                    console.log("catttt");
+                    player.tokenImg = img;
+                    console.log("car");
                     
                 } else if (player.token == "cat") {
                     var img = document.createElement("img");
@@ -588,6 +589,8 @@
 
                     img.style.right = right + "px";    
                     document.body.appendChild(img);
+                    player.tokenImg = img;
+                    console.log("cat");
                 } else if (player.token == "hat") {
                     var img = document.createElement("img");
                     img.src = "monopoly_hat_t.png";
@@ -616,6 +619,8 @@
 
                     img.style.right = right + "px";
                     document.body.appendChild(img);
+                    player.tokenImg = img;
+                    console.log("hat");
                 } else if (player.token == "horse") {
                     var img = document.createElement("img");
                     img.src = "monopoly_horse_t.png";
@@ -641,9 +646,10 @@
                     } else if (index==4) {
                         right = 473
                     }
-
                     img.style.right = right + "px";
                     document.body.appendChild(img);
+                    player.tokenImg = img;
+                    console.log("horse");
                 } else if (player.token == "siren") {
                     var img = document.createElement("img");
                     img.src = "monopoly_siren_t.png";
@@ -669,10 +675,10 @@
                     } else if (index==4) {
                         right = 473
                     }
-
                     img.style.right = right + "px";
                     document.body.appendChild(img);
-                    
+                    player.tokenImg = img;
+                    console.log("siren");
                 };
                 
             }
@@ -729,9 +735,15 @@
                 console.log("dice rolled are " + d1 + " and " + d2);
                 var totalSteps = parseInt(d1) + parseInt(d2);
                 console.log(boxesProperties[totalSteps].name);
-                var targetBoxLeft = document.getElementById("box"+totalSteps).getBoundingClientRect().left;
-                var targetBoxTop = document.getElementById("box"+totalSteps).getBoundingClientRect().top;
-                
+                const player = allPlayers[whoIsPlaying];
+                console.log("Before move: player " + player.name + " at position " + player.position);
+                console.log("Moving to " + totalSteps+player.position + " box.");
+                let newposition = (totalSteps + player.position) % 40;
+                var targetBoxLeft = document.getElementById("box"+ newposition).getBoundingClientRect().left;
+                var targetBoxTop = document.getElementById("box"+ newposition).getBoundingClientRect().top;
+                player.position = newposition
+                player.tokenImg.style.left = targetBoxLeft + "px";
+                player.tokenImg.style.top = targetBoxTop + "px";
 
                 document.getElementById("Dice1").src = "Dice" + d1 + ".png";
                 document.getElementById("Dice2").src = "Dice" + d2 + ".png";
@@ -779,7 +791,8 @@
                         properties: [],
                         inJail: false,
                         jailTurns: 0,
-                        token: null
+                        token: null,
+                        tokenImg: null
                     };
                     allPlayers.push(newPlayer1);
                     let newPlayer2 = {
@@ -789,7 +802,8 @@
                         properties: [],
                         inJail: false,
                         jailTurns: 0,
-                        token: null
+                        token: null,
+                        tokenImg: null
                     };
                     allPlayers.push(newPlayer2);
                     document.getElementById("player_names_input").style.display = "none";
@@ -813,7 +827,9 @@
                         properties: [],
                         inJail: false,
                         jailTurns: 0,
-                        token: null
+                        token: null,
+                        tokenImg: null
+
                     };
                     allPlayers.push(newPlayer1);
                     let newPlayer2 = {
@@ -823,7 +839,9 @@
                         properties: [],
                         inJail: false,
                         jailTurns: 0,
-                        token: null
+                        token: null,
+                        tokenImg: null
+
                     };
                     allPlayers.push(newPlayer2);
                     let newPlayer3 = {
@@ -833,7 +851,8 @@
                         properties: [],
                         inJail: false,
                         jailTurns: 0,
-                        token: null
+                        token: null,
+                        tokenImg: null
                     };
                     allPlayers.push(newPlayer3);
                     document.getElementById("player_names_input").style.display = "none";
@@ -859,7 +878,8 @@
                         properties: [],
                         inJail: false,
                         jailTurns: 0,
-                        token: null
+                        token: null,
+                        tokenImg: null
                     };
                     allPlayers.push(newPlayer1);
                     let newPlayer2 = {
@@ -869,7 +889,8 @@
                         properties: [],
                         inJail: false,
                         jailTurns: 0,
-                        token: null
+                        token: null,
+                        tokenImg: null
                     };
                     allPlayers.push(newPlayer2);
                     let newPlayer3 = {
@@ -879,7 +900,8 @@
                         properties: [],
                         inJail: false,
                         jailTurns: 0,
-                        token: null
+                        token: null,
+                        tokenImg: null
                     };
                     allPlayers.push(newPlayer3);
                     let newPlayer4 = {
@@ -889,7 +911,8 @@
                         properties: [],
                         inJail: false,
                         jailTurns: 0,
-                        token: null
+                        token: null,
+                        tokenImg: null
                     };
                     allPlayers.push(newPlayer4);
                     document.getElementById("player_names_input").style.display = "none";
@@ -917,7 +940,8 @@
                         properties: [],
                         inJail: false,
                         jailTurns: 0,
-                        token: null
+                        token: null,
+                        tokenImg: null
                     };
                     allPlayers.push(newPlayer1);
                     let newPlayer2 = {
@@ -927,7 +951,8 @@
                         properties: [],
                         inJail: false,
                         jailTurns: 0,
-                        token: null
+                        token: null,
+                        tokenImg: null
                     };
                     allPlayers.push(newPlayer2);
                     let newPlayer3 = {
@@ -937,7 +962,8 @@
                         properties: [],
                         inJail: false,
                         jailTurns: 0,
-                        token: null
+                        token: null,
+                        tokenImg: null
                     };
                     allPlayers.push(newPlayer3);
                     let newPlayer4 = {
@@ -947,7 +973,8 @@
                         properties: [],
                         inJail: false,
                         jailTurns: 0,
-                        token: null
+                        token: null,
+                        tokenImg: null
                     };
                     allPlayers.push(newPlayer4);
                     let newPlayer5 = {
@@ -957,7 +984,8 @@
                         properties: [],
                         inJail: false,
                         jailTurns: 0,
-                        token: null
+                        token: null,
+                        tokenImg: null
                     };
                     allPlayers.push(newPlayer5);
                     document.getElementById("player_names_input").style.display = "none";
