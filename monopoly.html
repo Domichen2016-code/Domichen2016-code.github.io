@@ -49,7 +49,7 @@
             top: 10px;
             left: 10px;
             width: 300px;
-            height: 200px;
+            height: 400px;
             background-color: rgba(186, 37, 37, 0.8);
             border-radius: 10px;
             padding: 10px;
@@ -472,6 +472,7 @@
     </style>
     <script>
         var boxesProperties = {
+            0: {name: "Go", ownerable: false},  
             1: {name: "Mediterranean Ave", price: 60, rent: 2, ownerable: true, owner:null},
             2: {name: "Community Chest 1", ownerable: false},
             3: {name: "Baltic Ave", price: 60, rent: 4, ownerable: true, owner:null},
@@ -547,7 +548,7 @@
             curerentToken = token;
         }
         function showUserInfo() {
-            document.getElementById("ActiveMessage").innerHTML = "Who is playing: " + allPlayers[whoIsPlaying].name + "<br>" + actionMessages[0];
+            document.getElementById("message").innerHTML = "Who is playing: " + allPlayers[whoIsPlaying].name + "<br>" + actionMessages[0];
             for (let index = 0; index < allPlayers.length; index++) {
                 const player = allPlayers[index];
             }
@@ -730,6 +731,7 @@
                     console.log("game starts now", allPlayers);
                     putalltokens();
                     showUserInfo();
+                    whoIsPlaying = 0;
                     return;
                 } else {
                     document.getElementById("activePlayer").innerHTML = allPlayers[whoIsChoosing - 1].name;
@@ -759,13 +761,8 @@
                 var d1 = document.getElementById("Dice1").src.at(-5);
                 var d2 = document.getElementById("Dice2").src.at(-5);
                 var total = parseInt(d1) + parseInt(d2);
-                whoIsPlaying = (whoIsPlaying + 1) % no_of_players;
-                console.log("dice rolled are " + d1 + " and " + d2);
                 var totalSteps = parseInt(d1) + parseInt(d2);
-                console.log(boxesProperties[totalSteps].name);
                 const player = allPlayers[whoIsPlaying];
-                console.log("Before move: player " + player.name + " at position " + player.position);
-                console.log("Moving to " + totalSteps+player.position + " box.");
                 let newposition = (totalSteps + player.position) % 40;
                 var targetBoxLeft = document.getElementById("box"+ newposition).getBoundingClientRect().left;
                 var targetBoxTop = document.getElementById("box"+ newposition).getBoundingClientRect().top;
@@ -800,8 +797,6 @@
         }
 
         function confirmnames() {
-            console.log("Names printed");
-
             if(no_of_players == 2) {
                 if (document.getElementById("player1_name").value == "" && document.getElementById("player2_name").value == "") {
                     document.getElementById("Namestitle").innerHTML = "Please enter both Player 1 and Player 2 names.";  
@@ -810,8 +805,6 @@
                 } else if (document.getElementById("player2_name").value == "") {
                     document.getElementById("Namestitle").innerHTML = "Please enter Player 2 name.";
                 } else {    
-                    console.log("both are there");
-                    // Save names and select characters
                     let newPlayer1 = {
                         name: `${document.getElementById("player1_name").value}`,
                         money: 1500,
@@ -846,8 +839,6 @@
                 } else if (document.getElementById("player3_name").value == "") {
                     document.getElementById("Namestitle").innerHTML = "Please enter Player 3 name.";
                 } else {
-                    console.log("all three are there");
-                    // Save names and select characters
                     let newPlayer1 = {
                         name: `${document.getElementById("player1_name").value}`,
                         money: 1500,
@@ -897,8 +888,6 @@
                 } else if (document.getElementById("player4_name").value == "") {
                     document.getElementById("Namestitle").innerHTML = "Please enter Player 4 name.";
                 } else {
-                    console.log("all four are there");
-                    // Save names and select characters
                     let newPlayer1 = {
                         name: `${document.getElementById("player1_name").value}`,
                         money: 1500,
@@ -959,8 +948,6 @@
                 } else if (document.getElementById("player5_name").value == "") {
                     document.getElementById("Namestitle").innerHTML = "Please enter Player 5 name.";
                 } else {
-                    console.log("all five are there");
-                    // Save names and select characters
                     let newPlayer1 = {
                         name: `${document.getElementById("player1_name").value}`,
                         money: 1500,
@@ -1024,9 +1011,11 @@
             document.getElementById("activePlayer").innerHTML = allPlayers[whoIsChoosing - 1].name;
         }
         function buyProperty() {
-            console.log("Property buy");
+            console.log("Property buy", whoIsPlaying);
             const player = allPlayers[whoIsPlaying];
             const property = boxesProperties[player.position];
+            console.log(player.position, property);
+            
             if (property.ownerable == false) {
                 console.log("This property cannot be purchased.");
                 return;
@@ -1057,6 +1046,7 @@
         }
         function endTurn() {
             console.log("Turn ended");
+            whoIsPlaying = (whoIsPlaying + 1) % no_of_players;
         }
         </script>
 </head>
@@ -1081,20 +1071,45 @@
     </div>
 
     <div id="board">
-        <div id="ActiveMessage"></div>
-        <div id="AllUserInfo"></div>
-        <div id="BuyOrNotBuy">
-            <span>Would you like to buy this property?</span>
-            <br>
-            <button onclick="buyProperty()">Buy</button>
-            <button onclick="doNotBuyProperty()">Skip</button>
+        <div id="ActiveMessage">
+            <span id="message"></span>
+            <div id="action_roll">
+                <img src="DiceEmpty.png" id="Dice1">
+                <img src="DiceEmpty.png" id="Dice2">
+                <div id="Roll" onclick="RollStopDice()">Roll</div>
+            </div>
+            
+            <div id="action_end_turn">
+                <button id="EndTurn" onclick="endTurn()">
+                    End Turn
+                </button>
+            </div>
+
+            <div id="action_pay_rent"></div>
+
+            <div id="action_jail"></div>
+
+            <div id="action_buy">
+                <div id="BuyOrNotBuy">
+                    <span>Would you like to buy this property?</span>
+                    <br>
+                    <button onclick="buyProperty()">Buy</button>
+                    <button onclick="doNotBuyProperty()">Skip</button>
+                </div>
+            </div>
+
+            <div id="action_pay_tax"></div>
+
+            <div id="action_draw_chance"></div>
+
+            <div id="action_draw_community_chest"></div>
         </div>
-        <button id="EndTurn" onclick="endTurn()">
-            End Turn
-        </button>
-        <img src="DiceEmpty.png" id="Dice1">
-        <img src="DiceEmpty.png" id="Dice2">
-        <div id="Roll" onclick="RollStopDice()">Roll</div>
+        <div id="AllUserInfo"></div>
+        
+        
+
+    
+
         <div id="box0">Go</div>
         <div id="box1">Meditera
             nean Ave</div>
