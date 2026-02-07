@@ -36,7 +36,7 @@
             top: 10px;
             right: 10px;
             width: 300px;
-            height: 400px;
+            bottom: 10px;
             background-color: rgba(130, 27, 27, 0.3);
             border-radius: 10px;
             padding: 10px;
@@ -57,11 +57,11 @@
             font-family: Arial, sans-serif;
             font-size: 16px;
         }
-        #BuyOrNotBuy{
+        #action_buy{
             position: absolute;
-            top: 320px;
+            top: 220px;
             left: 10px;
-            width: 300px;
+            width: 250px;
             height: 100px;
             background-color: rgba(224, 129, 40, 0.8);
             border-radius: 10px;
@@ -69,10 +69,11 @@
             box-shadow: 0 4px 8px rgba(145, 188, 147, 0.2);
             font-family: Arial, sans-serif;
             font-size: 16px;
+            display: none;
         }
-        #EndTurn{
+        #action_end_turn{
             position: absolute;
-            top: 480px;
+            top: 280px;
             left: 50px;
             width: 100px;
             height: 40px;
@@ -83,6 +84,7 @@
             font-family: Arial, sans-serif;
             font-size: 16px;
             cursor: pointer;
+            display: none;
         }
         #Roll{
             position: absolute;
@@ -548,7 +550,7 @@
             curerentToken = token;
         }
         function showUserInfo() {
-            document.getElementById("message").innerHTML = "Who is playing: " + allPlayers[whoIsPlaying].name + "<br>" + actionMessages[0];
+            document.getElementById("message").innerHTML = "Who is playing: " + allPlayers[whoIsPlaying].name + "<br>" ;
             for (let index = 0; index < allPlayers.length; index++) {
                 const player = allPlayers[index];
             }
@@ -753,8 +755,8 @@
                 var die2 = Math.floor(Math.random() * 6) + 1;
                 document.getElementById("Dice1").src = "Dice" + die1 + ".png";
                 document.getElementById("Dice2").src = "Dice" + die2 + ".png";
-            }, 200);
-            document.getElementById("Roll").innerHTML = "Stop";
+                }, 200);
+                document.getElementById("Roll").innerHTML = "Stop";
             }  else {
                 showUserInfo();
                 clearInterval(diceRolling);
@@ -773,6 +775,18 @@
                 document.getElementById("Dice1").src = "Dice" + d1 + ".png";
                 document.getElementById("Dice2").src = "Dice" + d2 + ".png";
                 document.getElementById("Roll").innerHTML = "Roll";
+
+                document.getElementById("action_buy").style.display = "block";
+                document.getElementById("action_roll").style.display = "none";
+                if(boxesProperties[newposition].ownerable == false) {
+                    document.getElementById("action_buy").style.display = "none";
+                    document.getElementById("action_end_turn").style.display = "block";
+                    document.getElementById("message").innerHTML = "Who is playing: " + allPlayers[whoIsPlaying].name + "<br>" 
+                    + "You rolled a " + total + ". You landed on " + boxesProperties[newposition].name + ".";
+                } else if (boxesProperties[newposition].ownerable == true && boxesProperties[newposition].owner == null) {
+                    document.getElementById("message").innerHTML = "Who is playing: " + allPlayers[whoIsPlaying].name + "<br>" 
+                + "You rolled a " + total + ". Do you want to buy " + boxesProperties[newposition].name + " for $" + boxesProperties[newposition].price + "?";
+                }
             }
             
             
@@ -1043,10 +1057,17 @@
         }
         function doNotBuyProperty() {
             console.log("Property not bought");
+            document.getElementById("action_buy").style.display = "none";
+            document.getElementById("action_end_turn").style.display = "block";
         }
         function endTurn() {
             console.log("Turn ended");
             whoIsPlaying = (whoIsPlaying + 1) % no_of_players;
+            document.getElementById("action_end_turn").style.display = "none";  
+            document.getElementById("action_roll").style.display = "block";
+            document.getElementById("Dice1").src = "DiceEmpty.png";
+            document.getElementById("Dice2").src = "DiceEmpty.png";
+            showUserInfo();
         }
         </script>
 </head>
@@ -1090,12 +1111,10 @@
             <div id="action_jail"></div>
 
             <div id="action_buy">
-                <div id="BuyOrNotBuy">
-                    <span>Would you like to buy this property?</span>
-                    <br>
-                    <button onclick="buyProperty()">Buy</button>
-                    <button onclick="doNotBuyProperty()">Skip</button>
-                </div>
+                <span>Would you like to buy this property?</span>
+                <br>
+                <button onclick="buyProperty()">Buy</button>
+                <button onclick="doNotBuyProperty()">Skip</button>
             </div>
 
             <div id="action_pay_tax"></div>
@@ -1104,7 +1123,53 @@
 
             <div id="action_draw_community_chest"></div>
         </div>
-        <div id="AllUserInfo"></div>
+        <div id="AllUserInfo">
+            <div id="player1_info">
+                <span id="player1_name_info"></span>
+                <br>
+                <span id="player1_money"></span>
+                <br>
+                <div id="player1_properties"></div>
+                <br>
+                <div id="player1_specialcards"></div>
+            </div>
+            <div id="player2_info">
+                <span id="player2_name_info"></span>
+                <br>
+                <span id="player2_money"></span>
+                <br>
+                <div id="player2_properties"></div>
+                <br>
+                <div id="player2_specialcards"></div>
+            </div>
+            <div id="player3_info">
+                <span id="player3_name_info"></span>
+                <br>
+                <span id="player3_money"></span>
+                <br>
+                <div id="player3_properties"></div>
+                <br>
+                <div id="player3_specialcards"></div>
+            </div>
+            <div id="player4_info">
+                <span id="player4_name_info"></span>
+                <br>
+                <span id="player4_money"></span>
+                <br>
+                <div id="player4_properties"></div>
+                <br>
+                <div id="player4_specialcards"></div>
+            </div>
+            <div id="player5_info">
+                <span id="player5_name_info"></span>
+                <br>
+                <span id="player5_money"></span>
+                <br>
+                <div id="player5_properties"></div>
+                <br>
+                <div id="player5_specialcards"></div>
+            </div>
+        </div>
         
         
 
