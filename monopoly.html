@@ -729,6 +729,7 @@
                     console.log("all players have chosen their tokens");
                     document.getElementById("CharacterSelection").style.display = 'none';
                     document.getElementById("board").style.display = 'block';
+                    displayAllUserInfo()
                     document.body.style.backgroundImage = "url('Monopoly_Board.jpg')";
                     console.log("game starts now", allPlayers);
                     putalltokens();
@@ -824,6 +825,7 @@
                         money: 1500,
                         position: 0,
                         properties: [],
+                        specialcards: [],
                         inJail: false,
                         jailTurns: 0,
                         token: null,
@@ -834,6 +836,7 @@
                         name: `${document.getElementById("player2_name").value}`,
                         money: 1500,
                         position: 0,
+                        specialcards: [],
                         properties: [],
                         inJail: false,
                         jailTurns: 0,
@@ -857,6 +860,7 @@
                         name: `${document.getElementById("player1_name").value}`,
                         money: 1500,
                         position: 0,
+                        specialcards: [],
                         properties: [],
                         inJail: false,
                         jailTurns: 0,
@@ -869,6 +873,7 @@
                         name: `${document.getElementById("player2_name").value}`,
                         money: 1500,
                         position: 0,
+                        specialcards: [],
                         properties: [],
                         inJail: false,
                         jailTurns: 0,
@@ -881,6 +886,7 @@
                         name: `${document.getElementById("player3_name").value}`,
                         money: 1500,
                         position: 0,
+                        specialcards: [],
                         properties: [],
                         inJail: false,
                         jailTurns: 0,
@@ -907,6 +913,7 @@
                         money: 1500,
                         position: 0,
                         properties: [],
+                        specialcards: [],
                         inJail: false,
                         jailTurns: 0,
                         token: null,
@@ -918,6 +925,7 @@
                         money: 1500,
                         position: 0,
                         properties: [],
+                        specialcards: [],
                         inJail: false,
                         jailTurns: 0,
                         token: null,
@@ -929,6 +937,7 @@
                         money: 1500,
                         position: 0,
                         properties: [],
+                        specialcards: [],
                         inJail: false,
                         jailTurns: 0,
                         token: null,
@@ -940,6 +949,7 @@
                         money: 1500,
                         position: 0,
                         properties: [],
+                        specialcards: [],
                         inJail: false,
                         jailTurns: 0,
                         token: null,
@@ -967,6 +977,7 @@
                         money: 1500,
                         position: 0,
                         properties: [],
+                        specialcards: [],
                         inJail: false,
                         jailTurns: 0,
                         token: null,
@@ -978,6 +989,7 @@
                         money: 1500,
                         position: 0,
                         properties: [],
+                        specialcards: [],
                         inJail: false,
                         jailTurns: 0,
                         token: null,
@@ -989,6 +1001,7 @@
                         money: 1500,
                         position: 0,
                         properties: [],
+                        specialcards: [],
                         inJail: false,
                         jailTurns: 0,
                         token: null,
@@ -1000,6 +1013,7 @@
                         money: 1500,
                         position: 0,
                         properties: [],
+                        specialcards: [],
                         inJail: false,
                         jailTurns: 0,
                         token: null,
@@ -1010,6 +1024,7 @@
                         name: `${document.getElementById("player5_name").value}`,
                         money: 1500,
                         position: 0,
+                        specialcards: [],
                         properties: [],
                         inJail: false,
                         jailTurns: 0,
@@ -1048,6 +1063,9 @@
                     player.properties.push(property.name);
                     property.owner = player.name;
                     console.log(player.name + " bought " + property.name + " for $" + property.price);
+                     document.getElementById("action_buy").style.display = "none";
+                     document.getElementById("action_end_turn").style.display = "block";
+                     displayAllUserInfo()
                 } else {
                     console.log(player.name + " does not have enough money to buy " + property.name);
                 }
@@ -1068,6 +1086,53 @@
             document.getElementById("Dice1").src = "DiceEmpty.png";
             document.getElementById("Dice2").src = "DiceEmpty.png";
             showUserInfo();
+        }
+
+        function displayAllUserInfo(params) {
+
+            document.getElementById("player1_name_info").innerHTML = allPlayers[0].name
+            document.getElementById("player1_money").innerHTML = allPlayers[0].money
+            document.getElementById("player1_properties").innerHTML = allPlayers[0].properties
+            if (allPlayers[0].specialcards != null) {
+                document.getElementById("player1_specialcards").innerHTML = allPlayers[0].specialcards
+            }
+
+
+            document.getElementById("player2_name_info").innerHTML = allPlayers[1].name
+            document.getElementById("player2_money").innerHTML = allPlayers[1].money
+            document.getElementById("player2_properties").innerHTML = allPlayers[1].properties
+            if (allPlayers[1].specialcards != null) {
+                document.getElementById("player2_specialcards").innerHTML = allPlayers[1].specialcards
+            }
+
+            if (no_of_players>=3) {   
+            document.getElementById("player3_name_info").innerHTML = allPlayers[2].name
+            document.getElementById("player3_money").innerHTML = allPlayers[2].money
+            document.getElementById("player3_properties").innerHTML = allPlayers[2].properties
+            if (allPlayers[2].specialcards != null) {
+                document.getElementById("player3_specialcards").innerHTML = allPlayers[2].specialcards
+            }
+            }
+
+            if (no_of_players>=4) {
+            document.getElementById("player4_name_info").innerHTML = allPlayers[3].name
+            document.getElementById("player4_money").innerHTML = allPlayers[3].money
+            document.getElementById("player4_properties").innerHTML = allPlayers[3].properties
+            if (allPlayers[3].specialcards != null) {
+                document.getElementById("player4_specialcards").innerHTML = allPlayers[3].specialcards
+            }
+            }
+           
+            if (no_of_players>=5) {
+            document.getElementById("player5_name_info").innerHTML = allPlayers[4].name
+            document.getElementById("player5_money").innerHTML = allPlayers[4].money
+            document.getElementById("player5_properties").innerHTML = allPlayers[4].properties
+             if (allPlayers[4].specialcards != null) {
+                document.getElementById("player5_specialcards").innerHTML = allPlayers[4].specialcards
+            }
+            }
+            
+            
         }
         </script>
 </head>
