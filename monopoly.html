@@ -102,6 +102,20 @@
             line-height: 30px;
             cursor: pointer;
         }
+        #action_draw_chance{
+            position: absolute;
+            top: 220px;
+            left: 10px;
+            width: 250px;
+            height: 100px;
+            background-color: rgba(224, 129, 40, 0.8);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(145, 188, 147, 0.2);
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            display: none;
+        }
         #Dice1
         {
             position: absolute;
@@ -781,9 +795,22 @@
                 document.getElementById("action_roll").style.display = "none";
                 if(boxesProperties[newposition].ownerable == false) {
                     document.getElementById("action_buy").style.display = "none";
-                    document.getElementById("action_end_turn").style.display = "block";
-                    document.getElementById("message").innerHTML = "Who is playing: " + allPlayers[whoIsPlaying].name + "<br>" 
-                    + "You rolled a " + total + ". You landed on " + boxesProperties[newposition].name + ".";
+                    document.getElementById("message").innerHTML = "Who is playing: " + allPlayers[whoIsPlaying].name + "<br>"
+                    if (boxesProperties[newposition].name.includes("Chance")) {
+                        document.getElementById("action_draw_chance").style.display = "block";
+                    } else if (boxesProperties[newposition].name.includes("Community Chest")) {
+                        document.getElementById("action_draw_community").style.display = "block";
+                    } else if (boxesProperties[newposition].name.includes("Income Tax")) {
+                        document.getElementById("action_pay_tax").style.display = "block";
+                    } else if (boxesProperties[newposition].name.includes("Free Parking")) {
+                        document.getElementById("action_free_parking").style.display = "block";
+                    } else if (boxesProperties[newposition].name.includes("Go To Jail")) {
+                        document.getElementById("action_go_to_jail").style.display = "block";
+                    } else {
+                        document.getElementById("action_end_turn").style.display = "block";
+ 
+                    }
+                    document.getElementById("message").innerHTML += "You rolled a " + total + ". You landed on " + boxesProperties[newposition].name + ".";
                 } else if (boxesProperties[newposition].ownerable == true && boxesProperties[newposition].owner == null) {
                     document.getElementById("message").innerHTML = "Who is playing: " + allPlayers[whoIsPlaying].name + "<br>" 
                 + "You rolled a " + total + ". Do you want to buy " + boxesProperties[newposition].name + " for $" + boxesProperties[newposition].price + "?";
@@ -792,6 +819,29 @@
             
             
         }
+
+        function randomInteger(min, max) {
+           return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function chanceCardMoney() {
+            var randomMoney = randomInteger(-100, 100);
+            console.log("chance ", randomMoney);
+            
+            const player = allPlayers[whoIsPlaying];
+            player.money += randomMoney;
+            console.log(player);
+            
+            if (randomMoney > 0) {
+                document.getElementById("message").innerHTML += "<br>You drew a Chance card and received $" + randomMoney + ".";
+            } else {
+                document.getElementById("message").innerHTML += "<br>You drew a Chance card and lost $" + Math.abs(randomMoney) + ".";
+            }
+            displayAllUserInfo();
+            document.getElementById("action_draw_chance").style.display = "none";
+            document.getElementById("action_end_turn").style.display = "block";
+        }
+
         function setPlayers(num) {
             no_of_players = num;
             document.getElementById("number_of_players").style.display = "none";
@@ -1134,6 +1184,10 @@
             
             
         }
+        
+        function drawChanceCard() {
+            chanceCardMoney()
+        }
         </script>
 </head>
 <body>
@@ -1184,7 +1238,9 @@
 
             <div id="action_pay_tax"></div>
 
-            <div id="action_draw_chance"></div>
+            <div id="action_draw_chance">
+                <button onclick="drawChanceCard()">Draw Chance Card</button>
+            </div>
 
             <div id="action_draw_community_chest"></div>
         </div>
