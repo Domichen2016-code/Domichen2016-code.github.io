@@ -116,6 +116,20 @@
             font-size: 16px;
             display: none;
         }
+        #action_draw_community{
+            position: absolute;
+            top: 220px;
+            left: 10px;
+            width: 250px;
+            height: 100px;
+            background-color: rgba(224, 129, 40, 0.8);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(145, 188, 147, 0.2);
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            display: none;
+        }
         #Dice1
         {
             position: absolute;
@@ -779,6 +793,7 @@
                 var d2 = document.getElementById("Dice2").src.at(-5);
                 var total = parseInt(d1) + parseInt(d2);
                 var totalSteps = parseInt(d1) + parseInt(d2);
+                totalSteps = 2
                 const player = allPlayers[whoIsPlaying];
                 let newposition = (totalSteps + player.position) % 40;
                 var targetBoxLeft = document.getElementById("box"+ newposition).getBoundingClientRect().left;
@@ -824,7 +839,7 @@
            return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 
-        function chanceCardMoney() {
+        function chanceCommunityCardMoney() {
             var randomMoney = randomInteger(-100, 100);
             console.log("chance ", randomMoney);
             
@@ -839,6 +854,7 @@
             }
             displayAllUserInfo();
             document.getElementById("action_draw_chance").style.display = "none";
+            document.getElementById("action_draw_community").style.display = "none";
             document.getElementById("action_end_turn").style.display = "block";
         }
 
@@ -1186,7 +1202,10 @@
         }
         
         function drawChanceCard() {
-            chanceCardMoney()
+            chanceCommunityCardMoney()
+        }
+        function drawCommunityChestCard() {
+            chanceCommunityCardMoney()
         }
         </script>
 </head>
@@ -1242,7 +1261,9 @@
                 <button onclick="drawChanceCard()">Draw Chance Card</button>
             </div>
 
-            <div id="action_draw_community_chest"></div>
+            <div id="action_draw_community">
+                    <button onclick="drawCommunityChestCard()">Draw Community Chest Card</button>
+            </div>
         </div>
         <div id="AllUserInfo">
             <div id="player1_info">
