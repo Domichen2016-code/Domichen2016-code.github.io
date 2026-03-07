@@ -158,6 +158,20 @@
             font-size: 16px;
             display: none;
         }
+        #action_jail{
+            position: absolute;
+            top: 220px;
+            left: 10px;
+            width: 250px;
+            height: 100px;
+            background-color: rgba(224, 129, 40, 0.8);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(145, 188, 147, 0.2);
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            display: none;
+        }
         #Dice1
         {
             position: absolute;
@@ -821,7 +835,17 @@
                 var d2 = document.getElementById("Dice2").src.at(-5);
                 var total = parseInt(d1) + parseInt(d2);
                 var totalSteps = parseInt(d1) + parseInt(d2);
+                 totalSteps = 40
                 const player = allPlayers[whoIsPlaying];
+                if (totalSteps+player.position > 40) {
+                    player.money += 200;
+                    document.getElementById("message").innerHTML += "<br>You passed Go and collected $200!";
+                    displayAllUserInfo();
+                } else if (totalSteps+player.position == 40) {
+                    player.money += 400;
+                    document.getElementById("message").innerHTML += "<br>You landed on Go and collected $400!";
+                    displayAllUserInfo();
+                }
                 let newposition = (totalSteps + player.position) % 40;
                 var targetBoxLeft = document.getElementById("box"+ newposition).getBoundingClientRect().left;
                 var targetBoxTop = document.getElementById("box"+ newposition).getBoundingClientRect().top;
@@ -848,9 +872,17 @@
                     } else if (boxesProperties[newposition].name.includes("Luxury Tax")) {
                         document.getElementById("action_pay_luxury_tax").style.display = "block";
                      } else if (boxesProperties[newposition].name.includes("Free Parking")) {
-                        document.getElementById("action_free_parking").style.display = "block";
+                        document.getElementById("action_end_turn").style.display = "block";
                     } else if (boxesProperties[newposition].name.includes("Go To Jail")) {
-                        document.getElementById("action_go_to_jail").style.display = "block";
+                        document.getElementById("action_jail").style.display = "block";
+                        const player = allPlayers[whoIsPlaying];
+                        let newposition = 10;
+                        var targetBoxLeft = document.getElementById("box"+ newposition).getBoundingClientRect().left;
+                        var targetBoxTop = document.getElementById("box"+ newposition).getBoundingClientRect().top;
+                        player.position = newposition
+                        player.tokenImg.style.left = targetBoxLeft + "px";
+                        player.tokenImg.style.top = targetBoxTop + "px";
+
                     } else {
                         document.getElementById("action_end_turn").style.display = "block";
  
@@ -1230,6 +1262,13 @@
             
             
         }
+        function payJail() {
+            const player = allPlayers[whoIsPlaying];
+            player.money -= 50;
+            displayAllUserInfo();
+            document.getElementById("action_jail").style.display = "none";
+            document.getElementById("action_roll").style.display = "block";
+        }
         
         function drawChanceCard() {
             chanceCommunityCardMoney()
@@ -1284,7 +1323,11 @@
 
             <div id="action_pay_rent"></div>
 
-            <div id="action_jail"></div>
+
+            <div id="action_jail">
+                You are in Jail. Pay $50 to get out.
+                <button onclick="payJail()">Pay $50</button>
+            </div>
 
             <div id="action_buy">
                 <span>Would you like to buy this property?</span>
