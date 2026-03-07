@@ -201,6 +201,20 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             display: none;
         }
+        #action_pay_rent{
+            position: absolute;
+            top: 220px;
+            left: 10px;
+            width: 250px;
+            height: 100px;
+            background-color: rgba(224, 129, 40, 0.8);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(145, 188, 147, 0.2);
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            display: none;
+        }
         #box0{
             background-color: rgba(173, 216, 230, 0.563);
             width: 105px;
@@ -835,7 +849,7 @@
                 var d2 = document.getElementById("Dice2").src.at(-5);
                 var total = parseInt(d1) + parseInt(d2);
                 var totalSteps = parseInt(d1) + parseInt(d2);
-                 totalSteps = 40
+                 totalSteps = 6
                 const player = allPlayers[whoIsPlaying];
                 if (totalSteps+player.position > 40) {
                     player.money += 200;
@@ -856,8 +870,6 @@
                 document.getElementById("Dice1").src = "Dice" + d1 + ".png";
                 document.getElementById("Dice2").src = "Dice" + d2 + ".png";
                 document.getElementById("Roll").innerHTML = "Roll";
-
-                document.getElementById("action_buy").style.display = "block";
                 document.getElementById("action_roll").style.display = "none";
                 if(boxesProperties[newposition].ownerable == false) {
                     document.getElementById("action_buy").style.display = "none";
@@ -868,7 +880,6 @@
                         document.getElementById("action_draw_community").style.display = "block";
                     } else if (boxesProperties[newposition].name.includes("Income Tax")) {
                         document.getElementById("action_pay_income_tax").style.display = "block";
-                    
                     } else if (boxesProperties[newposition].name.includes("Luxury Tax")) {
                         document.getElementById("action_pay_luxury_tax").style.display = "block";
                      } else if (boxesProperties[newposition].name.includes("Free Parking")) {
@@ -884,13 +895,32 @@
                         player.tokenImg.style.top = targetBoxTop + "px";
 
                     } else {
+                        
                         document.getElementById("action_end_turn").style.display = "block";
  
                     }
                     document.getElementById("message").innerHTML += "You rolled a " + total + ". You landed on " + boxesProperties[newposition].name + ".";
                 } else if (boxesProperties[newposition].ownerable == true && boxesProperties[newposition].owner == null) {
+                    document.getElementById("action_buy").style.display = "block";
                     document.getElementById("message").innerHTML = "Who is playing: " + allPlayers[whoIsPlaying].name + "<br>" 
                 + "You rolled a " + total + ". Do you want to buy " + boxesProperties[newposition].name + " for $" + boxesProperties[newposition].price + "?";
+                } else if (boxesProperties[newposition].ownerable == true && boxesProperties[newposition].owner != null) {
+                    console.log("property is owned by ", boxesProperties[newposition].owner);
+                    const player = allPlayers[whoIsPlaying];
+                    if (boxesProperties[newposition].owner == player.name) {
+                        console.log("you own this property");
+                        
+                        document.getElementById("message").innerHTML = "Who is playing: " + allPlayers[whoIsPlaying].name + "<br>" 
+                        + "You rolled a " + total + ". You landed on your own property " + boxesProperties[newposition].name + ".";
+                    } else {
+                        console.log("you need to pay rent to ", boxesProperties[newposition].owner);
+                        const owner = allPlayers.find(p => p.name === boxesProperties[newposition].owner);
+
+                        document.getElementById("message").innerHTML = "Who is playing: " + allPlayers[whoIsPlaying].name + "<br>" 
+                        + "You rolled a " + total + ". You landed on " + boxesProperties[newposition].name + " owned by " + owner.name + ". You will pay $" + boxesProperties[newposition].rent + " to " + owner.name + " by pressing the Pay Rent button.";
+                        displayAllUserInfo();
+                        document.getElementById("action_pay_rent").style.display = "block";
+                    }
                 }
             }
             
@@ -1284,6 +1314,17 @@
             document.getElementById("action_pay_luxury_tax").style.display = "none";
             document.getElementById("action_end_turn").style.display = "block";
         }
+        function payRent() {
+            const player = allPlayers[whoIsPlaying];
+            const property = boxesProperties[player.position];
+            player.money -= property.rent;
+            const owner = allPlayers.find(p => p.name === property.owner);
+            owner.money += property.rent;
+            displayAllUserInfo();
+            document.getElementById("action_pay_rent").style.display = "none";
+            document.getElementById("action_end_turn").style.display = "block";
+            document.getElementById("message").innerHTML = "<br>You paid $" + property.rent + " rent to " + owner.name + ".";
+        }
         </script>
 </head>
 <body>
@@ -1321,8 +1362,9 @@
                 </button>
             </div>
 
-            <div id="action_pay_rent"></div>
-
+            <div id="action_pay_rent">
+                <button onclick="payRent()">Pay Rent</button>
+            </div>
 
             <div id="action_jail">
                 You are in Jail. Pay $50 to get out.
