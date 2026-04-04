@@ -5,9 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Number Memory</title>
     <link rel="icon" type="image/x-icon" href="Favicon.png">
+    <script>
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }   
+        function countdown(seconds) {
+            var countdownElement = document.getElementById("countdownTimer");
+            countdownElement.innerHTML = "Memorize the number: " + seconds;
+            if (seconds > 0) {
+                setTimeout(function() {
+                    countdown(seconds - 1);
+                }, 1000);
+            } else {
+                countdownElement.innerHTML = "Time's up! Enter the number.";
+                document.getElementById("numberDisplay").style.display = "none";
+                document.getElementById("confirmNumber").style.display = "block";
+                document.getElementById("userInput").style.display = "block";
+            }
+            
+        }
 
+        var targetNumber = 0;
+
+        function nextLevel() {
+            targetNumber = getRandomInt(1,10);
+            document.getElementById("numberDisplay").innerHTML = targetNumber;
+            document.getElementById("numberDisplay").style.display = "block";
+            countdown(3);
+        }
+    </script>
 </head>
 <body>
-    
+   <div id="startGame" onclick="nextLevel()">Click here to start the game</div>
+   <div id="nextLevel" onclick="nextLevel()">Advance to Next Level</div>  
+   <div id="giveUp">Give Up</div>
+   <div id="confirmNumber">Confirm Number</div>
+   <div id="numberDisplay"></div>
+   <div id="countdownTimer"></div>
+    <input type="number" id="userInput" onclick="pressearly()">
+
 </body>
 </html>
