@@ -1,1 +1,2 @@
-print (hello world)
+print("This is file 1")
+print(100)
